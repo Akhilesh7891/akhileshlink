@@ -1,0 +1,185 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <ng-container *ngIf="contact">
+        <ng-container *ngIf="contact.id">Edit</ng-container>
+        <ng-container *ngIf="!contact.id">Create</ng-container>
+        contact
+        <ng-container *ngIf="contact.id"> with ID '{{contact.id}}</ng-container>
+      </ng-container>
+    </div>
+  </div>
+  <div class="overlay overlay-block cursor-default modal-body">
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="overlay-layer bg-transparent">
+        <div class="spinner spinner-lg spinner-success"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="contact">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">
+        <div class="form-group row">
+            <div class="col-lg-12"> <h4>Contact Details:</h4></div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-3">
+            <label>First Name</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              autocomplete="off"
+              placeholder="First Name"
+              name="firstName"
+              [class.is-invalid]="isControlInvalid('firstName')"
+              [class.is-valid]="isControlValid('firstName')"
+              formControlName="firstName"
+            />
+            <div class="feedback" *ngIf="!isControlTouched('firstName')">
+              Please enter first name
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('firstName')">
+              First Name was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'firstName')"
+            >
+              First Name is required
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('minlength', 'firstName')"
+            >
+              First Name should have at least 3 symbols
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('maxLength', 'firstName')"
+            >
+              First Name should have maximum 100 symbols
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <label>Last Name</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              autocomplete="off"
+              placeholder="Last Name"
+              name="lastName"
+              [class.is-invalid]="isControlInvalid('lastName')"
+              [class.is-valid]="isControlValid('lastName')"
+              formControlName="lastName"
+            />
+            <div class="feedback" *ngIf="!isControlTouched('lastName')">
+              Please enter last name
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('lastName')">
+              Last Name was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'lastName')"
+            >
+              Last Name is required
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('minlength', 'lastName')"
+            >
+              Last Name should have at least 3 symbols
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('maxLength', 'lastName')"
+            >
+              Last Name should have maximum 100 symbols
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <label>Email</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              autocomplete="off"
+              placeholder="Email"
+              name="email"
+              [class.is-invalid]="isControlInvalid('email')"
+              [class.is-valid]="isControlValid('email')"
+              formControlName="email"
+            />
+            <div class="feedback" *ngIf="!isControlTouched('email')">
+              Please enter email
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('email')">
+              Email was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'email')"
+            >
+              Email is required
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('minlength', 'email')"
+            >
+              Email should have at least 3 symbols
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('maxLength', 'email')"
+            >
+              Email should have maximum 100 symbols
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <label>Mobile</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              autocomplete="off"
+              placeholder="Mobile"
+              name="phone"
+              [class.is-invalid]="isControlInvalid('phone')"
+              [class.is-valid]="isControlValid('phone')"
+              formControlName="phone"
+            />
+            <div class="feedback" *ngIf="!isControlTouched('phone')">
+              Please enter Mobile
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('phone')">
+              Email was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'phone')"
+            >
+              Mobile is required
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('minlength', 'phone')"
+            >
+              Mobile should have at least 10 symbols
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('maxLength', 'phone')"
+            >
+              Mobile should have maximum 10 symbols
+            </div>
+          </div>
+        </div>
+      </form>
+    </ng-container>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light btn-elevate mr-2" (click)="modal.dismiss()">Cancel</button>
+    <ng-container *ngIf="contact">
+
+      <button type="submit" class="btn btn-primary btn-elevate" (click)="save()"
+        [disabled]="formGroup.invalid">Save</button>
+    </ng-container>
+  </div>
+</div>

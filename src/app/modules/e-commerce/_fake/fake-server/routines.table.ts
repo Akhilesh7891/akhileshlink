@@ -1,0 +1,35 @@
+export class RoutinesTable {
+  public static routines: any = [
+    {
+      id: 1,
+      openTimeMon: '00.00.00',
+      openTimeTue: '00.00.00',
+      openTimeWed: '00.00.00',
+      openTimeThur: '00.00.00',
+      openTimeFri: '00.00.00',
+      openTimeSat: '00.00.00',
+      openTimeSun: '00.00.00',
+      closeTimeMon: '00.00.00',
+      closeTimeTue: '00.00.00',
+      closeTimeWed: '00.00.00',
+      closeTimeThur: '00.00.00',
+      closeTimeFri: '00.00.00',
+      closeTimeSat: '00.00.00',
+      closeTimeSun: '00.00.00',
+      lunchTimeMon: '00.00.00',
+      lunchTimeTue: '00.00.00',
+      lunchTimeWed: '00.00.00',
+      lunchTimeThur: '00.00.00',
+      lunchTimeFri: '00.00.00',
+      lunchTimeSat: '00.00.00',
+      lunchTimeSun: '00.00.00',
+      breakTimeMon: '00.00.00',
+      breakTimeTue: '00.00.00',
+      breakTimeWed: '00.00.00',
+      breakTimeThur: '00.00.00',
+      breakTimeFri: '00.00.00',
+      breakTimeSat: '00.00.00',
+      breakTimeSun: '00.00.00',
+    }
+  ];
+}

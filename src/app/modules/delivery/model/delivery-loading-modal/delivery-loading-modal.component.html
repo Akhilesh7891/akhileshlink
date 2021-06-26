@@ -1,0 +1,82 @@
+<div class="card card-custom gutter-b">
+    <div class="card-body">
+        <div class="mt-5">
+            <div class="table-responsive angular-bootstrap-table">
+                <table class="table table-head-custom table-vertical-center overflow-hidden">
+                    <thead>
+                        <tr>
+                            <th class="text-dark">
+                                Item Code
+                            </th>          
+                            <th>
+                                Item Name
+                                
+                            </th>
+                            <th>
+                                Quantity
+                                
+                            </th>
+                            <th>
+                                Unit
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of additionalModalBind">
+                            <td>{{item.ItemCode}}</td>
+                            <td>{{item.ItemName}}</td>
+                            <td>{{item.Quantity}}</td>
+                            <td>{{item.Unit}}</td>  
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <form
+          action="#"
+          class="form form-label-right mt-3"
+          [formGroup]="formGroup"
+          (ngSubmit)="save()"
+        >  
+            <div class="row form-group">
+                
+                <div class="col-sm-4">
+                    <label>Loading Date</label>
+                    <input
+                        type="date"
+                        class="form-control form-control-lg form-control-solid"
+                        autocomplete="off"
+                        placeholder="Loading Date"
+                        name="loadingDate"
+                        formControlName="loadingDate"
+                    />
+                    
+                </div>
+                <div class="col-sm-4">
+                    <label>Loading Time</label>
+                    <input
+                        type="time"
+                        class="form-control form-control-lg form-control-solid"
+                        autocomplete="off"
+                        placeholder="Loading Time"
+                        name="loadingTime"
+                        formControlName="loadingTime"
+                    />
+                    
+                </div>
+            </div>
+            <div class="float-right">
+                
+                <button
+                    type="submit"
+                    class="btn btn-primary font-weight-bold mr-2"
+                 
+                >
+                    Save
+                </button>
+            </div>
+        </form> 
+      </div>
+      
+    </div>  
+    

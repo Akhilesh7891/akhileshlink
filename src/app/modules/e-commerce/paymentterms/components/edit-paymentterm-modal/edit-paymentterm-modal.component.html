@@ -1,0 +1,165 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <ng-container *ngIf="paymentterm">
+        <ng-container *ngIf="paymentterm.id">Edit</ng-container>
+        <ng-container *ngIf="!paymentterm.id">Create</ng-container>
+        Payment Term
+        <ng-container *ngIf="paymentterm.id"
+          >'{{ paymentterm.paymentTerm }}'</ng-container
+        >
+      </ng-container>
+    </div>
+  </div>
+  <div
+    class="overlay overlay-block cursor-default modal-body"
+    style="min-height: 404px"
+  >
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="overlay-layer bg-transparent">
+        <div class="spinner spinner-lg spinner-success"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="paymentterm">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">
+        
+        
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label class="form-label">Payment Term</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="paymentTerm"
+              placeholder="Payment term"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('paymentTerm')"
+              [class.is-valid]="isControlValid('paymentTerm')"
+              formControlName="paymentTerm"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('paymentTerm')">
+              Payment Term was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'paymentTerm')"
+            >
+              Payment Term is required
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <label class="form-label">Payment Term Code</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="paymentTermCode"
+              placeholder="Payment term code"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('paymentTermCode')"
+              [class.is-valid]="isControlValid('paymentTermCode')"
+              formControlName="paymentTermCode"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('paymentTermCode')">
+              Payment Term Code was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'paymentTermCode')"
+            >
+              Payment Term Code is required
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <label class="form-label">Description</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="description"
+              placeholder="description"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('description')"
+              [class.is-valid]="isControlValid('description')"
+              formControlName="description"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('description')">
+              description was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'description')"
+            >
+             Description is required
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+
+          <div class="col-lg-4">
+            <label class="form-label">Days</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="days"
+              placeholder="Days"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('days')"
+              [class.is-valid]="isControlValid('days')"
+              formControlName="days"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('days')">
+              Days was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'days')"
+            >
+              Days is required
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <label>Status</label>
+            <select
+              class="form-control form-control-lg form-control-solid"
+              name="status"
+              [class.is-invalid]="isControlInvalid('status')"
+              formControlName="status"
+            >
+              <option value="0">Active</option>
+              <option value="1">Inactive</option>
+            </select>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'status')"
+            >
+              Status is required
+            </div>
+          </div> 
+        </div>
+      </form>
+    </ng-container>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light btn-elevate mr-2"
+      (click)="modal.dismiss()"
+    >
+      Cancel
+    </button>
+    <ng-container *ngIf="paymentterm">
+      <button
+        type="submit"
+        class="btn btn-primary btn-elevate"
+        (click)="save()"
+        [disabled]="formGroup.invalid"
+      >
+        Save
+      </button>
+    </ng-container>
+  </div>
+</div>

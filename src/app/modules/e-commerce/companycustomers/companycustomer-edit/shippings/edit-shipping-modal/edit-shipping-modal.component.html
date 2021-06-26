@@ -1,0 +1,264 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <ng-container *ngIf="shipping">
+        <ng-container *ngIf="shipping.id">Edit</ng-container>
+        <ng-container *ngIf="!shipping.id">Create</ng-container>
+        shipping
+        <ng-container *ngIf="shipping.id"> with ID '{{shipping.id}}</ng-container>
+      </ng-container>
+    </div>
+  </div>
+  <div class="overlay overlay-block cursor-default modal-body">
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="overlay-layer bg-transparent">
+        <div class="spinner spinner-lg spinner-success"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="shipping">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">
+
+        <div class="form-group row">
+            <div class="col-lg-4"> <h4>Shipping Details:</h4></div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label>Shipping Code</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              autocomplete="off"
+              placeholder="Address Code"
+              name="shipAddressCode"
+              [class.is-invalid]="isControlInvalid('shipAddressCode')"
+              [class.is-valid]="isControlValid('shipAddressCode')"
+              formControlName="shipAddressCode"
+            />
+            <div class="feedback" *ngIf="!isControlTouched('shipAddressCode')">
+              Please enter Address Code
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('shipAddressCode')">
+              Address Code was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'shipAddressCode')"
+            >
+              Address Code is required
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('minlength', 'shipAddressCode')"
+            >
+              Address Code should have at least 1 symbols
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('maxLength', 'shipAddressCode')"
+            >
+              Address Code should have maximum 100 symbols
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label>Shipping Address</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              autocomplete="off"
+              placeholder="Shipping Address"
+              name="shipAddress"
+              [class.is-invalid]="isControlInvalid('shipAddress')"
+              [class.is-valid]="isControlValid('shipAddress')"
+              formControlName="shipAddress"
+            />
+            <div class="feedback" *ngIf="!isControlTouched('shipAddress')">
+              Please enter Shipping Address
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('shipAddress')">
+              Shipping Address was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'shipAddress')"
+            >
+              Shipping Address is required
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('minlength', 'shipAddress')"
+            >
+              Shipping Address should have at least 1 symbols
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('maxLength', 'shipAddress')"
+            >
+              Shipping Address should have maximum 100 symbols
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <label>Shipping City</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              autocomplete="off"
+              placeholder="Shipping City"
+              name="shipCity"
+              [class.is-invalid]="isControlInvalid('shipCity')"
+              [class.is-valid]="isControlValid('shipCity')"
+              formControlName="shipCity"
+            />
+            <div class="feedback" *ngIf="!isControlTouched('shipCity')">
+              Please enter Shipping City
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('shipCity')">
+              Shipping City was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'shipCity')"
+            >
+              Shipping City is required
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('minlength', 'shipCity')"
+            >
+              Shipping City should have at least 1 symbols
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('maxLength', 'shipCity')"
+            >
+              Shipping City should have maximum 100 symbols
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label>Shipping State</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              autocomplete="off"
+              placeholder="Shipping State"
+              name="shipState"
+              [class.is-invalid]="isControlInvalid('shipState')"
+              [class.is-valid]="isControlValid('shipState')"
+              formControlName="shipState"
+            />
+            <div class="feedback" *ngIf="!isControlTouched('shipState')">
+              Please enter Shipping State
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('shipState')">
+              Shipping State was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'shipState')"
+            >
+              Shipping State is required
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('minlength', 'shipState')"
+            >
+              Shipping State should have at least 1 symbols
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('maxLength', 'shipState')"
+            >
+              Shipping State should have maximum 100 symbols
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label>Shipping Zip</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              autocomplete="off"
+              placeholder="Shipping Zip"
+              name="shipZipCode"
+              [class.is-invalid]="isControlInvalid('shipZipCode')"
+              [class.is-valid]="isControlValid('shipZipCode')"
+              formControlName="shipZipCode"
+            />
+            <div class="feedback" *ngIf="!isControlTouched('shipZipCode')">
+              Please enter Shipping Zip
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('shipZipCode')">
+              Shipping Zip was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'shipZipCode')"
+            >
+              Shipping Zip is required
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('minlength', 'shipZipCode')"
+            >
+              Shipping Zip should have at least 3 symbols
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('maxLength', 'shipZipCode')"
+            >
+              Shipping Zip should have maximum 6 symbols
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label>Shipping Country</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              autocomplete="off"
+              placeholder="Shipping Country"
+              name="shipCountry"
+              [class.is-invalid]="isControlInvalid('shipCountry')"
+              [class.is-valid]="isControlValid('shipCountry')"
+              formControlName="shipCountry"
+            />
+            <div class="feedback" *ngIf="!isControlTouched('shipCountry')">
+              Please enter Shipping Country
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('shipCountry')">
+              Shipping Country was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'shipCountry')"
+            >
+              Shipping Country is required
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('minlength', 'shipCountry')"
+            >
+              Shipping Country should have at least 1 symbols
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('maxLength', 'shipCountry')"
+            >
+              Shipping Country should have maximum 100 symbols
+            </div>
+          </div>
+        </div>
+      </form>
+    </ng-container>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light btn-elevate mr-2" (click)="modal.dismiss()">Cancel</button>
+    <ng-container *ngIf="shipping">
+
+      <button type="submit" class="btn btn-primary btn-elevate" (click)="save()"
+        [disabled]="formGroup.invalid">Save</button>
+    </ng-container>
+  </div>
+</div>

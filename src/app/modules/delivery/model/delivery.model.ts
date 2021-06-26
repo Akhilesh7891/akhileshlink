@@ -1,0 +1,10 @@
+import { BaseModel } from '../../../_metronic/shared/crud-table';
+
+export interface Delivery extends BaseModel {
+  id: number;
+  paymentTermCode: string;
+  paymentTerm: string;
+  description: string;
+  days: number;
+  status: number; // Active = 0 | Inactive = 1
+}

@@ -1,0 +1,272 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <ng-container *ngIf="leaverequest">
+        <ng-container *ngIf="leaverequest.id">Edit</ng-container>
+        <ng-container *ngIf="!leaverequest.id">Create</ng-container>
+        LeaveRequest
+        <ng-container *ngIf="leaverequest.id"
+          >'{{ leaverequest.employeeCode }} - {{ leaverequest.leaveCode }}'</ng-container
+        >
+      </ng-container>
+    </div>
+  </div>
+  <div
+    class="overlay overlay-block cursor-default modal-body"
+    style="min-height: 404px"
+  >
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="overlay-layer bg-transparent">
+        <div class="spinner spinner-lg spinner-success"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="leaverequest">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">
+        
+        
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label class="form-label">Employee Code</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="employeeCode"
+              placeholder="Employee Code"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('employeeCode')"
+              [class.is-valid]="isControlValid('employeeCode')"
+              formControlName="employeeCode"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('employeeCode')">
+              Employee Code was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'employeeCode')"
+            >
+              Employee Code is required
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <label class="form-label">Leave Code</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="leaveCode"
+              placeholder="Leave Code"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('leaveCode')"
+              [class.is-valid]="isControlValid('leaveCode')"
+              formControlName="leaveCode"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('leaveCode')">
+              Leave Code was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'leaveCode')"
+            >
+              Leave Code is required
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <label class="form-label">Leave Type</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="leaveType"
+              placeholder="Leave Type"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('leaveType')"
+              [class.is-valid]="isControlValid('leaveType')"
+              formControlName="leaveType"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('leaveType')">
+              Leave Type was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'leaveType')"
+            >
+              Leave Type is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <div class="col-xl-4">
+            <label>From Date</label>
+            <!-- <div class="input-group input-group-solid">
+              <input type="text" name="formDate" class="form-control form-control-lg form-control-solid"
+                autocomplete="off" placeholder="dd/mm/yyyy" ngbDatepicker #d="ngbDatepicker"
+                [class.is-invalid]="isControlInvalid('formDate')" [class.is-valid]="isControlValid('formDate')"
+                formControlName="formDate" readonly="true" />
+              <div class="input-group-append" (click)="d.toggle()">
+                <span class="input-group-text">
+                  <i class="text-dark-50 flaticon-calendar"></i>
+                </span>
+              </div>
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('formDate')">Form Date was entered correct</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'formDate')">Please enter form date in
+              'mm/dd/yyyy' format</div> -->
+            </div>
+            <div class="col-xl-4">
+            <label>To Date</label>
+            <!-- <div class="input-group input-group-solid">
+              <input type="text" name="toDate" class="form-control form-control-lg form-control-solid"
+                autocomplete="off" placeholder="dd/mm/yyyy" ngbDatepicker #d="ngbDatepicker"
+                [class.is-invalid]="isControlInvalid('toDate')" [class.is-valid]="isControlValid('toDate')"
+                formControlName="toDate" readonly="true" />
+              <div class="input-group-append" (click)="d.toggle()">
+                <span class="input-group-text">
+                  <i class="text-dark-50 flaticon-calendar"></i>
+                </span>
+              </div>
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('toDate')">To Date was entered correct</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'toDate')">Please enter to date in
+              'mm/dd/yyyy' format</div> -->
+            </div>
+
+            <div class="col-lg-4">
+            <label class="form-label">Leave Days</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="leaveDays"
+              placeholder="Leave Days"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('leaveDays')"
+              [class.is-valid]="isControlValid('leaveDays')"
+              formControlName="leaveDays"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('leaveDays')">
+              Leave Days was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'leaveDays')"
+            >
+              Leave Days is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <div class="col-lg-4">
+            <label class="form-label">Unpaid Days</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="unpaiddays"
+              placeholder="Unpaid Days"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('unpaiddays')"
+              [class.is-valid]="isControlValid('unpaiddays')"
+              formControlName="unpaiddays"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('unpaiddays')">
+              Unpaid Days was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'unpaiddays')"
+            >
+              Unpaid Days is required
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label">Remark</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="remark"
+              placeholder="Remark"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('remark')"
+              [class.is-valid]="isControlValid('remark')"
+              formControlName="remark"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('remark')">
+              Remark was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'remark')"
+            >
+              Remark is required
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label">Remark By</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="remarkBy"
+              placeholder="Remark By"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('remarkBy')"
+              [class.is-valid]="isControlValid('remarkBy')"
+              formControlName="remarkBy"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('remarkBy')">
+              Remark By was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'remarkBy')"
+            >
+              Remark By is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <div class="col-lg-4">
+            <label>Status</label>
+            <select
+              class="form-control form-control-lg form-control-solid"
+              name="status"
+              [class.is-invalid]="isControlInvalid('status')"
+              formControlName="status"
+            >
+              <option value="0">Active</option>
+              <option value="1">Inactive</option>
+            </select>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'status')"
+            >
+              Status is required
+            </div>
+          </div> 
+        </div>
+
+
+      </form>
+    </ng-container>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light btn-elevate mr-2"
+      (click)="modal.dismiss()"
+    >
+      Cancel
+    </button>
+    <ng-container *ngIf="leaverequest">
+      <button
+        type="submit"
+        class="btn btn-primary btn-elevate"
+        (click)="save()"
+        [disabled]="formGroup.invalid"
+      >
+        Save
+      </button>
+    </ng-container>
+  </div>
+</div>

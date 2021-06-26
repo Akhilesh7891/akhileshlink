@@ -1,0 +1,93 @@
+<div class="card card-custom gutter-b">
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">CashReceipts list</h3>
+    </div>
+    <div class="card-toolbar">
+      <button type="button" class="btn btn-primary" (click)="create()">New CashReceipt</button>
+    </div>
+  </div>
+  <div class="card-body">
+    <!-- begin: Filtration form -->
+    <div class="form form-label-right">
+      <div class="form-group row">
+       <!--  <div class="col-lg-2" [formGroup]="filterGroup">
+          <select class="form-control" name="status" placeholder="Filter by Status" formControlName="status">
+            <option value="">All</option>
+            <option value="0">Active</option>
+            <option value="2">Inactive</option>
+          </select><small class="form-text text-muted"><b>Filter</b> by Status</small>
+        </div> -->
+        <div class="col-lg-2" [formGroup]="searchGroup">
+          <input type="text" class="form-control" name="searchText" placeholder="Search" value=""
+            formControlName="searchTerm" /><small class="form-text text-muted"><b>Search</b> in all fields</small>
+        </div>
+      </div>
+    </div>
+    <!-- end: Filtration form -->
+    <!-- begin:Table -->
+    <div class="table-responsive angular-bootstrap-table">
+      <table class="table table-head-custom table-vertical-center overflow-hidden">
+       <thead>
+          <th class="text-dark">
+            Order Code
+            <app-sort-icon column="orderCode" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+              (sort)="sort($event)"></app-sort-icon>
+          </th>
+          <th class="text-dark">
+            Customer Code
+            <app-sort-icon column="customerCode" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+              (sort)="sort($event)"></app-sort-icon>
+          </th>
+
+          <th class="text-dark">
+            Customer Name
+            <app-sort-icon column="customerName" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+              (sort)="sort($event)"></app-sort-icon>
+          </th>
+
+          <th class="text-dark">
+            Mobile
+            <app-sort-icon column="mobile" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+              (sort)="sort($event)"></app-sort-icon>
+          </th>          
+
+          <th class="text-dark">
+            Amount
+            <app-sort-icon column="amount" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+              (sort)="sort($event)"></app-sort-icon>
+          </th>
+          <th>ACTIONS</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cashreceipt of cashreceiptService.items$ | async">
+            <!-- <td>{{ cashreceipt.id }}</td> -->
+            <td>{{ cashreceipt.orderCode }}</td>
+            <td>{{ cashreceipt.customerCode }}</td>
+            <td>{{ cashreceipt.customerName }}</td>
+             <td>{{ cashreceipt.mobile }}</td>
+            <td>{{ cashreceipt.amount }}</td>           
+            <td>
+              <a title="Edit cashreceipt" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+                (click)="edit(cashreceipt.id)">
+                <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
+                  class="svg-icon svg-icon-md svg-icon-primary">
+                </span>
+              </a>
+
+              <a title="Delete cashreceipt" class="btn btn-icon btn-light btn-hover-danger btn-sm"
+                (click)="delete(cashreceipt.id)">
+                <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
+                  class="svg-icon svg-icon-md svg-icon-danger">
+                </span>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- end: Table -->
+    <app-paginator class="d-flex justify-content-between align-items-center flex-wrap" [paginator]="paginator"
+      [isLoading]="isLoading" (paginate)="paginate($event)"></app-paginator>
+  </div>
+</div>

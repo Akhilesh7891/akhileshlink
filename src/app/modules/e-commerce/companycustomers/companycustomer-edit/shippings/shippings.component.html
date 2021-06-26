@@ -1,0 +1,90 @@
+<div class="mt-5">
+  <!-- begin: Filtration form -->
+  <div class="form margin-b-30">
+    <div class="form-filtration">
+      <div class="row align-items-center">
+        <div class="col-md-2 margin-bottom-10-mobile">
+          <form [formGroup]="searchGroup">
+            <div>
+              <input type="text" class="form-control" name="searchText" placeholder="Search"
+                formControlName="searchTerm" />
+              <small class="form-text text-muted"><b>Search</b> in all fields</small></div>
+          </form>
+        </div>
+        <div class="col-md-6 margin-bottom-10-mobile"></div>
+        <div class="col-md-4 text-right margin-bottom-10-mobile">
+          <button type="button" class="btn btn-primary" (click)="create()">
+            Add new shiping
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end: Filtration form -->
+  <!-- begin:Table -->
+  <div class="table-responsive angular-bootstrap-table">
+    <table class="table table-head-custom table-vertical-center overflow-hidden">
+      <thead>
+        <th>
+          Address Code
+          <app-sort-icon column="shipAddressCode" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+            (sort)="sort($event)"></app-sort-icon>
+        </th>
+        <th>
+          Address
+          <app-sort-icon column="shipAddress" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+            (sort)="sort($event)"></app-sort-icon>
+        </th>
+        <th>
+          City
+          <app-sort-icon column="shipCity" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+            (sort)="sort($event)"></app-sort-icon>
+        </th>
+        <th>
+          State
+          <app-sort-icon column="shipState" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+            (sort)="sort($event)"></app-sort-icon>
+        </th>
+        <th>
+          Zip
+          <app-sort-icon column="shipZipCode" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+            (sort)="sort($event)"></app-sort-icon>
+        </th>
+        <th>
+          Country
+          <app-sort-icon column="shipCountry" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+            (sort)="sort($event)"></app-sort-icon>
+        </th>
+
+        <th>ACTIONS</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let shiping of shippingsService.items$ | async">
+          <td>{{ shiping.shipAddressCode }}</td>
+          <td>{{ shiping.shipAddress }}</td>
+          <td>{{ shiping.shipCity }}</td>
+          <td>{{ shiping.shipState }}</td>
+          <td>{{ shiping.shipZipCode }}</td>
+          <td>{{ shiping.shipCountry }}</td>
+          <td>
+            <button title="Edit shiping" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+              (click)="edit(shiping.id)">
+              <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
+                class="svg-icon svg-icon-md svg-icon-primary">
+              </span>
+            </button>
+            <button title="Delete shiping" class="btn btn-icon btn-light btn-hover-danger btn-sm"
+              (click)="delete(shiping.id)">
+              <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
+                class="svg-icon svg-icon-md svg-icon-danger">
+              </span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- end: Table -->
+  <app-paginator class="d-flex justify-content-between align-items-center flex-wrap" [paginator]="paginator"
+    [isLoading]="isLoading" (paginate)="paginate($event)"></app-paginator>
+</div>

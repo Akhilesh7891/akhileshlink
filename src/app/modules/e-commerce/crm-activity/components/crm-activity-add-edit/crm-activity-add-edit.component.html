@@ -1,0 +1,222 @@
+<div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title h4" id="example-modal-sizes-title-lg">
+        <!-- <ng-container *ngIf="routes">
+          <ng-container *ngIf="routes.id">Edit</ng-container>
+          <ng-container *ngIf="!routes.id">Create</ng-container>
+          Route
+          <ng-container *ngIf="routes.id"
+            >'{{ routes.routeName }}'</ng-container
+          >
+        </ng-container> -->
+         {{this.mode=='View'?'Details':'Create'}}
+      </div>
+    </div>
+    <div
+      class="overlay overlay-block cursor-default modal-body"
+      style="min-height: 404px"
+    >
+      <!-- <ng-container *ngIf="isLoading$ | async">
+        <div class="overlay-layer bg-transparent">
+          <div class="spinner spinner-lg spinner-success"></div>
+        </div>
+      </ng-container> -->
+  
+      <ng-container >
+        <form action="#" class="form form-label-right"  [formGroup]="formGroup">
+         <input type="hidden" value="{{formGroup.value|json}}">
+          <div class="form-group row">
+            <div class="col-lg-4">
+              <label class="form-label">Activity Code</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                formControlName="ActivityCode"  
+                placeholder="Activity Code"
+               
+              />
+            </div>
+            <div class="col-lg-4">
+                <label class="form-label">Activity Date</label>
+                <div class="input-group input-group-solid">
+                  <input type="text" name="date" class="form-control form-control-lg form-control-solid"
+                    autocomplete="off" placeholder="dd/mm/yyyy" ngbDatepicker #d="ngbDatepicker"
+                    formControlName="ActivityDate" readonly="true" />
+                  <div class="input-group-append" (click)="d.toggle()">
+                    <span class="input-group-text">
+                      <i class="text-dark-50 flaticon-calendar"></i>
+                    </span>
+                  </div>
+                </div>
+
+
+                <!-- <input
+                  type="text"
+                  class="form-control form-control-lg form-control-solid"
+                  formControlName="ActivityDate"
+                  placeholder="Activity Date"
+                  autocomplete="off"
+                /> -->
+              </div>
+              <div class="col-lg-4">
+                <label class="form-label">Activity Type</label>
+                <select class="form-control" name="status"
+                  formControlName="ActivityType">
+                  <option value="Call">Call</option>
+                  <option value="Meeting">Meeting</option>
+                  <option value="Task">Task</option>
+                </select>
+              </div>
+              <div class="col-lg-4">
+                <label class="form-label">Assign To</label>
+                <!-- <input
+                  type="text"
+                  class="form-control form-control-lg form-control-solid"
+                  formControlName="AssignTo"
+                  placeholder="Assign To"
+                  autocomplete="off"
+                /> -->
+
+                <select class="form-control" name="status"
+                formControlName="AssignTo">
+                <option *ngFor="let item of customerService.items$ | async" [value]="item.firstName">{{item.firstName}}</option>
+               
+              </select>
+              </div>
+              <div class="col-lg-4">
+                <label class="form-label">Start Date/Time</label>
+
+                <div class="input-group input-group-solid">
+                  <input type="text" name="StartDate" class="form-control form-control-lg form-control-solid"
+                    autocomplete="off" placeholder="dd/mm/yyyy" ngbDatepicker #d1="ngbDatepicker"
+                    formControlName="StartDate" readonly="true" />
+                  <div class="input-group-append" (click)="d1.toggle()">
+                    <span class="input-group-text">
+                      <i class="text-dark-50 flaticon-calendar"></i>
+                    </span>
+                  </div>
+                </div>
+
+
+                <!-- <input
+                  type="text"
+                  class="form-control form-control-lg form-control-solid"
+                  formControlName="StartDate"
+                  placeholder="Start Date/Time"
+                  autocomplete="off"
+                /> -->
+              </div>
+              <div class="col-lg-4">
+                <label class="form-label">End Date/Time</label>
+                <div class="input-group input-group-solid">
+                  <input type="text" name="EndDate" class="form-control form-control-lg form-control-solid"
+                    autocomplete="off" placeholder="dd/mm/yyyy" ngbDatepicker #d2="ngbDatepicker"
+                    formControlName="EndDate" readonly="true" />
+                  <div class="input-group-append" (click)="d2.toggle()">
+                    <span class="input-group-text">
+                      <i class="text-dark-50 flaticon-calendar"></i>
+                    </span>
+                  </div>
+                </div>
+                <!-- <input
+                  type="text"
+                  class="form-control form-control-lg form-control-solid"
+                  formControlName="EndDate"
+                  placeholder="End Date/Time"
+                  autocomplete="off"
+                /> -->
+              </div>
+              <div class="col-lg-4">
+                <label class="form-label">Subject</label>
+                <input
+                  type="text"
+                  class="form-control form-control-lg form-control-solid"
+                  formControlName="Subject"
+                  placeholder="Subject"
+                  autocomplete="off"
+                />
+              </div>
+              <div class="col-lg-4">
+                <label class="form-label">Meeting Location</label>
+                <input
+                  type="text"
+                  class="form-control form-control-lg form-control-solid"
+                  formControlName="MeetingLocation"
+                  placeholder="Meeting Location"
+                  autocomplete="off"
+                />
+              </div>
+              <div class="col-lg-4">
+                <label class="form-label">Customer Code</label>
+                <input
+                  type="text"
+                  class="form-control form-control-lg form-control-solid"
+                  formControlName="CustomerCode"
+                  placeholder="Customer Code"
+                  autocomplete="off"
+                />
+              </div>
+              <div class="col-lg-4">
+                <label class="form-label">Customer Name</label>
+                <input
+                  type="text"
+                  class="form-control form-control-lg form-control-solid"
+                  formControlName="CustomerName"
+                  placeholder="Customer Name"
+                  autocomplete="off"
+                />
+              </div>
+              <div class="col-lg-4">
+                <label class="form-label">Contact Person</label>
+                <input
+                  type="text"
+                  class="form-control form-control-lg form-control-solid"
+                  formControlName="ContactPerson"
+                  placeholder="Contact Person"
+                  autocomplete="off"
+                />
+              </div>
+              <div class="col-lg-4">
+                <label class="form-label">Mobile No.</label>
+                <input
+                  type="text"
+                  class="form-control form-control-lg form-control-solid"
+                  formControlName="MobileNo"
+                  placeholder="Mobile No."
+                  autocomplete="off"
+                />
+              </div>
+              <div class="col-lg-4">
+                <label class="form-label">Remarks</label>
+                <input
+                  type="text"
+                  class="form-control form-control-lg form-control-solid"
+                  formControlName="Remark"
+                  placeholder="Remarks"
+                  autocomplete="off"
+                />
+              </div>
+          </div>
+        </form>
+      </ng-container>
+    </div>
+    <div class="modal-footer" *ngIf="this.mode!='View'">
+      <button
+        type="button"
+        class="btn btn-light btn-elevate mr-2"
+        (click)="modal.dismiss()"
+      >
+        Cancel
+      </button>
+      <ng-container>
+        <button
+          type="submit"
+          class="btn btn-primary btn-elevate"
+          (click)="save()"
+        >
+          Save
+        </button>
+      </ng-container>
+    </div>
+  </div>
+  

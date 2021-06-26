@@ -1,0 +1,437 @@
+<div class="card card-custom gutter-b">
+  <ng-container *ngIf="isLoading$ | async">
+    <div class="progress progress-modal">
+      <div
+        class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
+        role="progressbar"
+        style="width: 100%"
+        aria-valuenow="100"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      ></div>
+    </div>
+  </ng-container>
+
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">
+        <ng-container *ngIf="routine">
+          {{ id ? "Edit" : "New" }} Routine
+        </ng-container>
+      </h3>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="mt-5" *ngIf="routine">
+      <form
+        action="#"
+        class="form form-label-right"
+        [formGroup]="routineForm"
+        (ngSubmit)="save()"
+      >
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Mon</th>
+                  <th>Tue</th>
+                  <th>Wed</th>
+                  <th>Thur</th>
+                  <th>Fri</th>
+                  <th>Sat</th>
+                  <th>Sun</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>Opent Time </th>
+                  <td>
+                    <input
+                      type="text"
+                      class="form-control form-control-lg form-control-solid"
+                      name="openTimeMon"
+                      placeholder="Time"
+                      autocomplete="off"
+                      [class.is-invalid]="isControlInvalid('openTimeMon')"
+                      [class.is-valid]="isControlValid('openTimeMon')"
+                      formControlName="openTimeMon"
+                    />
+                  </td>
+
+                  <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    name="openTimeTue"
+                    placeholder="Time"
+                    autocomplete="off"
+                    [class.is-invalid]="isControlInvalid('openTimeTue')"
+                    [class.is-valid]="isControlValid('openTimeTue')"
+                    formControlName="openTimeTue"
+                  />
+                  </td>
+
+                  <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    name="openTimeWed"
+                    placeholder="Time"
+                    autocomplete="off"
+                    [class.is-invalid]="isControlInvalid('openTimeWed')"
+                    [class.is-valid]="isControlValid('openTimeWed')"
+                    formControlName="openTimeWed"
+                  />
+                  </td>
+
+                  <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    name="openTimeThur"
+                    placeholder="Time"
+                    autocomplete="off"
+                    [class.is-invalid]="isControlInvalid('openTimeThur')"
+                    [class.is-valid]="isControlValid('openTimeThur')"
+                    formControlName="openTimeThur"
+                  />
+                  </td>
+
+                  <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    name="openTimeFri"
+                    placeholder="Time"
+                    autocomplete="off"
+                    [class.is-invalid]="isControlInvalid('openTimeFri')"
+                    [class.is-valid]="isControlValid('openTimeFri')"
+                    formControlName="openTimeFri"
+                  />
+                  </td>
+
+                  <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    name="openTimeSat"
+                    placeholder="Time"
+                    autocomplete="off"
+                    [class.is-invalid]="isControlInvalid('openTimeSat')"
+                    [class.is-valid]="isControlValid('openTimeSat')"
+                    formControlName="openTimeSat"
+                  />
+                  </td>
+
+                  <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    name="openTimeSun"
+                    placeholder="Time"
+                    autocomplete="off"
+                    [class.is-invalid]="isControlInvalid('openTimeSun')"
+                    [class.is-valid]="isControlValid('openTimeSun')"
+                    formControlName="openTimeSun"
+                  />
+                  </td>
+                </tr>
+                <tr>
+                  <th>Lunch Time </th>
+                  <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    name="lunchTimeMon"
+                    placeholder="Time"
+                    autocomplete="off"
+                    [class.is-invalid]="isControlInvalid('lunchTimeMon')"
+                    [class.is-valid]="isControlValid('lunchTimeMon')"
+                    formControlName="lunchTimeMon"
+                  />
+                  </td>
+
+                  <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    name="lunchTimeTue"
+                    placeholder="Time"
+                    autocomplete="off"
+                    [class.is-invalid]="isControlInvalid('lunchTimeTue')"
+                    [class.is-valid]="isControlValid('lunchTimeTue')"
+                    formControlName="lunchTimeTue"
+                  />
+                  </td>
+
+                  <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    name="lunchTimeWed"
+                    placeholder="Time"
+                    autocomplete="off"
+                    [class.is-invalid]="isControlInvalid('lunchTimeWed')"
+                    [class.is-valid]="isControlValid('lunchTimeWed')"
+                    formControlName="lunchTimeWed"
+                  />
+                  </td>
+
+                  <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    name="lunchTimeThur"
+                    placeholder="Time"
+                    autocomplete="off"
+                    [class.is-invalid]="isControlInvalid('lunchTimeThur')"
+                    [class.is-valid]="isControlValid('lunchTimeThur')"
+                    formControlName="lunchTimeThur"
+                  />
+                  </td>
+
+                  <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    name="lunchTimeFri"
+                    placeholder="Time"
+                    autocomplete="off"
+                    [class.is-invalid]="isControlInvalid('lunchTimeFri')"
+                    [class.is-valid]="isControlValid('lunchTimeFri')"
+                    formControlName="lunchTimeFri"
+                  />
+                  </td>
+
+                  <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    name="lunchTimeSat"
+                    placeholder="Time"
+                    autocomplete="off"
+                    [class.is-invalid]="isControlInvalid('lunchTimeSat')"
+                    [class.is-valid]="isControlValid('lunchTimeSat')"
+                    formControlName="lunchTimeSat"
+                  />
+                  </td>
+
+                  <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    name="lunchTimeSun"
+                    placeholder="Time"
+                    autocomplete="off"
+                    [class.is-invalid]="isControlInvalid('lunchTimeSun')"
+                    [class.is-valid]="isControlValid('lunchTimeSun')"
+                    formControlName="lunchTimeSun"
+                  />
+                  </td>
+                </tr>
+                <tr>
+                  <th>Break Time </th>
+                  <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    name="breakTimeMon"
+                    placeholder="Time"
+                    autocomplete="off"
+                    [class.is-invalid]="isControlInvalid('breakTimeMon')"
+                    [class.is-valid]="isControlValid('breakTimeMon')"
+                    formControlName="breakTimeMon"
+                  />
+                  </td>
+
+                  <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    name="breakTimeTue"
+                    placeholder="Time"
+                    autocomplete="off"
+                    [class.is-invalid]="isControlInvalid('breakTimeTue')"
+                    [class.is-valid]="isControlValid('breakTimeTue')"
+                    formControlName="breakTimeTue"
+                  />
+                  </td>
+
+                  <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    name="breakTimeWed"
+                    placeholder="Time"
+                    autocomplete="off"
+                    [class.is-invalid]="isControlInvalid('breakTimeWed')"
+                    [class.is-valid]="isControlValid('breakTimeWed')"
+                    formControlName="breakTimeWed"
+                  />
+                  </td>
+
+                  <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    name="breakTimeThur"
+                    placeholder="Time"
+                    autocomplete="off"
+                    [class.is-invalid]="isControlInvalid('breakTimeThur')"
+                    [class.is-valid]="isControlValid('breakTimeThur')"
+                    formControlName="breakTimeThur"
+                  />
+                  </td>
+
+                  <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    name="breakTimeFri"
+                    placeholder="Time"
+                    autocomplete="off"
+                    [class.is-invalid]="isControlInvalid('breakTimeFri')"
+                    [class.is-valid]="isControlValid('breakTimeFri')"
+                    formControlName="breakTimeFri"
+                  />
+                  </td>
+
+                  <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    name="breakTimeSat"
+                    placeholder="Time"
+                    autocomplete="off"
+                    [class.is-invalid]="isControlInvalid('breakTimeSat')"
+                    [class.is-valid]="isControlValid('breakTimeSat')"
+                    formControlName="breakTimeSat"
+                  />
+                  </td>
+
+                  <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    name="breakTimeSun"
+                    placeholder="Time"
+                    autocomplete="off"
+                    [class.is-invalid]="isControlInvalid('breakTimeSun')"
+                    [class.is-valid]="isControlValid('breakTimeSun')"
+                    formControlName="breakTimeSun"
+                  />
+                  </td>
+                </tr>
+                <tr>
+                  <th>Close Time </th>
+                  <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    name="closeTimeMon"
+                    placeholder="Time"
+                    autocomplete="off"
+                    [class.is-invalid]="isControlInvalid('closeTimeMon')"
+                    [class.is-valid]="isControlValid('closeTimeMon')"
+                    formControlName="closeTimeMon"
+                  />
+                  </td>
+
+                  <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    name="closeTimeTue"
+                    placeholder="Time"
+                    autocomplete="off"
+                    [class.is-invalid]="isControlInvalid('closeTimeTue')"
+                    [class.is-valid]="isControlValid('closeTimeTue')"
+                    formControlName="closeTimeTue"
+                  />
+                  </td>
+
+                  <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    name="closeTimeWed"
+                    placeholder="Time"
+                    autocomplete="off"
+                    [class.is-invalid]="isControlInvalid('closeTimeWed')"
+                    [class.is-valid]="isControlValid('closeTimeWed')"
+                    formControlName="closeTimeWed"
+                  />
+                  </td>
+
+                  <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    name="closeTimeThur"
+                    placeholder="Time"
+                    autocomplete="off"
+                    [class.is-invalid]="isControlInvalid('closeTimeThur')"
+                    [class.is-valid]="isControlValid('closeTimeThur')"
+                    formControlName="closeTimeThur"
+                  />
+                  </td>
+
+                  <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    name="closeTimeFri"
+                    placeholder="Time"
+                    autocomplete="off"
+                    [class.is-invalid]="isControlInvalid('closeTimeFri')"
+                    [class.is-valid]="isControlValid('closeTimeFri')"
+                    formControlName="closeTimeFri"
+                  />
+                  </td>
+
+                  <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    name="closeTimeSat"
+                    placeholder="Time"
+                    autocomplete="off"
+                    [class.is-invalid]="isControlInvalid('closeTimeSat')"
+                    [class.is-valid]="isControlValid('closeTimeSat')"
+                    formControlName="closeTimeSat"
+                  />
+                  </td>
+
+                  <td>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg form-control-solid"
+                    name="closeTimeSun"
+                    placeholder="Time"
+                    autocomplete="off"
+                    [class.is-invalid]="isControlInvalid('closeTimeSun')"
+                    [class.is-valid]="isControlValid('closeTimeSun')"
+                    formControlName="closeTimeSun"
+                  />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>                    
+        </div>
+         <hr>
+        <div class="float-right">
+          <button
+            type="submit"
+            class="btn btn-primary font-weight-bold mr-2"
+            [disabled]="routineForm.invalid"
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

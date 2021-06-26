@@ -1,0 +1,1152 @@
+<div class="card card-custom gutter-b">
+  <ng-container *ngIf="isLoading$ | async">
+    <div class="progress progress-modal">
+      <div
+        class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
+        role="progressbar"
+        style="width: 100%"
+        aria-valuenow="100"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      ></div>
+    </div>
+  </ng-container>
+
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">
+        <ng-container *ngIf="invoice">
+          {{ id ? "Edit" : "New" }} invoice
+          <span *ngIf="invoice && invoice.id"
+            > {{ invoice.customerCode }} </span
+          >
+        </ng-container>
+      </h3>
+    </div>
+    <div class="card-toolbar">
+      <a type="button" class="btn btn-light" routerLink="/ecommerce/invoices">
+        <i class="fa fa-arrow-left"></i>Back
+      </a>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="mt-5" *ngIf="invoice">
+      <form
+        action="#"
+        class="form form-label-right"
+        [formGroup]="invoiceForm"
+        (ngSubmit)="save()"
+      >
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label>Order Code</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              autocomplete="off"
+              placeholder="orderCode"
+              name="orderCode"
+              [class.is-invalid]="isControlInvalid('orderCode')"
+              [class.is-valid]="isControlValid('orderCode')"
+              formControlName="orderCode"
+            />
+            <div class="feedback" *ngIf="!isControlTouched('orderCode')">
+              Please enter Invoice Code
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('orderCode')">
+              Invoice Code was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'orderCode')"
+            >
+              Invoice Code is required
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('minlength', 'orderCode')"
+            >
+              Invoice Code should have at least 3 symbols
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('maxLength', 'orderCode')"
+            >
+              Invoice Code should have maximum 100 symbols
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label>Customer Code</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              autocomplete="off"
+              placeholder="customerCode"
+              name="customerCode"
+              [class.is-invalid]="isControlInvalid('customerCode')"
+              [class.is-valid]="isControlValid('customerCode')"
+              formControlName="customerCode"
+            />
+            <div class="feedback" *ngIf="!isControlTouched('customerCode')">
+              Please enter Invoice Code
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('customerCode')">
+              Invoice Code was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'customerCode')"
+            >
+              Invoice Code is required
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('minlength', 'customerCode')"
+            >
+              Invoice Code should have at least 3 symbols
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('maxLength', 'customerCode')"
+            >
+              Invoice Code should have maximum 100 symbols
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label>Customer Name</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              autocomplete="off"
+              placeholder="Customer Name"
+              name="customerName"
+              [class.is-invalid]="isControlInvalid('customerName')"
+              [class.is-valid]="isControlValid('customerName')"
+              formControlName="customerName"
+            />
+            <div class="feedback" *ngIf="!isControlTouched('customerName')">
+              Please enter Customer Name
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('customerName')">
+              Customer Name was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'customerName')"
+            >
+              Customer Name is required
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('minlength', 'customerName')"
+            >
+              Customer Name should have at least 3 symbols
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('maxLength', 'customerName')"
+            >
+              Customer Name should have maximum 100 symbols
+            </div>
+          </div>
+                    
+        </div>
+       
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label>Contact Person</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              autocomplete="off"
+              placeholder="Contact Person"
+              name="contactPerson"
+              [class.is-invalid]="isControlInvalid('contactPerson')"
+              [class.is-valid]="isControlValid('contactPerson')"
+              formControlName="contactPerson"
+            />
+            <div class="feedback" *ngIf="!isControlTouched('contactPerson')">
+              Please enter Contact Person
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('contactPerson')">
+              Contact Person was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'contactPerson')"
+            >
+              Contact Person is required
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('minlength', 'contactPerson')"
+            >
+              Contact Person should have at least 3 symbols
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('maxLength', 'contactPerson')"
+            >
+              Contact Person should have maximum 100 symbols
+            </div>
+          </div>   
+          <div class="col-lg-4">
+            <label>Mobile</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              autocomplete="off"
+              placeholder="mobile"
+              name="mobile"
+              [class.is-invalid]="isControlInvalid('mobile')"
+              [class.is-valid]="isControlValid('mobile')"
+              formControlName="mobile"
+            />
+            <div class="feedback" *ngIf="!isControlTouched('mobile')">
+              Please enter mobile
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('mobile')">
+              mobile was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'mobile')"
+            >
+              mobile is required
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('minlength', 'mobile')"
+            >
+              mobile should have at least 3 symbols
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('maxLength', 'mobile')"
+            >
+              mobile should have maximum 100 symbols
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label>Doc No.</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              autocomplete="off"
+              placeholder="docNo"
+              name="docNo"
+              [class.is-invalid]="isControlInvalid('docNo')"
+              [class.is-valid]="isControlValid('docNo')"
+              formControlName="docNo"
+            />
+            <div class="feedback" *ngIf="!isControlTouched('docNo')">
+              Please enter docNo
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('docNo')">
+              docNo was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'docNo')"
+            >
+              docNo is required
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('minlength', 'docNo')"
+            >
+              docNo should have at least 3 symbols
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('maxLength', 'docNo')"
+            >
+              docNo should have maximum 100 symbols
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-xl-4">
+          <label>Date</label>
+          <div class="input-group input-group-solid">
+            <input type="text" name="date" class="form-control form-control-lg form-control-solid"
+              autocomplete="off" placeholder="dd/mm/yyyy" ngbDatepicker #d="ngbDatepicker"
+              [class.is-invalid]="isControlInvalid('date')" [class.is-valid]="isControlValid('date')"
+              formControlName="date" readonly="true" />
+            <div class="input-group-append" (click)="d.toggle()">
+              <span class="input-group-text">
+                <i class="text-dark-50 flaticon-calendar"></i>
+              </span>
+            </div>
+          </div>
+          <div class="valid-feedback" *ngIf="isControlValid('date')">date was entered correct</div>
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'date')">Please enter date in
+            'mm/dd/yyyy' format</div>
+          </div>
+          <div class="col-lg-4">
+            <label>Status</label>
+            <select
+              class="form-control form-control-lg form-control-solid"
+              name="status"
+              formControlName="status"
+            >
+              <option value="0">Active</option>
+              <option value="1">Inactive</option>
+            </select>
+            <div class="feedback">Please select status</div>
+          </div>
+
+          <div class="col-lg-4">
+            <label>Collect Cash</label>
+            <select
+              class="form-control form-control-lg form-control-solid"
+              name="collectCash"
+              formControlName="collectCash"
+            >
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+            <div class="feedback">Please select collect cash</div>
+          </div>          
+        </div>
+
+        <div class="form-group row">
+          
+          <div class="col-lg-4">
+            <label>Amount</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              autocomplete="off"
+              placeholder="amount"
+              name="amount"
+              [class.is-invalid]="isControlInvalid('amount')"
+              [class.is-valid]="isControlValid('amount')"
+              formControlName="amount"
+            />
+            <div class="feedback" *ngIf="!isControlTouched('amount')">
+              Please enter amount
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('amount')">
+              amount was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'amount')"
+            >
+              amount is required
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('minlength', 'amount')"
+            >
+              amount should have at least 1 symbols
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('maxLength', 'amount')"
+            >
+              amount should have maximum 10 symbols
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label>Location</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              autocomplete="off"
+              placeholder="location"
+              name="location"
+              [class.is-invalid]="isControlInvalid('location')"
+              [class.is-valid]="isControlValid('location')"
+              formControlName="location"
+            />
+            <div class="feedback" *ngIf="!isControlTouched('location')">
+              Please enter location
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('location')">
+              location was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'location')"
+            >
+              location is required
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('minlength', 'location')"
+            >
+              location should have at least 1 symbols
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('maxLength', 'location')"
+            >
+              location should have maximum 100 symbols
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-lg-12">
+            <ul class="nav nav-tabs nav-tabs-line" role="tablist">
+              <li class="nav-item cursor-pointer" (click)="changeTab(tabs.ITEM_TAB)">
+                <a
+                  class="nav-link"
+                  data-toggle="tab"
+                  role="tab"
+                  [attr.aria-selected]="activeTabId === tabs.ITEM_TAB"
+                  [class.active]="activeTabId === tabs.ITEM_TAB"
+                >
+                  <strong>Items info</strong>
+                </a>
+              </li>
+              <li
+                *ngIf="invoice"
+                class="nav-item cursor-pointer"
+                (click)="changeTab(tabs.BILLING_TAB)"
+              >
+                <a
+                  class="nav-link"
+                  data-toggle="tab"
+                  role="button"
+                  [attr.aria-selected]="activeTabId === tabs.BILLING_TAB"
+                  [class.active]="activeTabId === tabs.BILLING_TAB"
+                  > <strong>Billing Details </strong></a
+                >
+              </li>
+
+              <li
+                *ngIf="invoice"
+                class="nav-item cursor-pointer"
+                (click)="changeTab(tabs.SHIPPING_TAB)"
+              >
+                <a
+                  class="nav-link"
+                  data-toggle="tab"
+                  role="button"
+                  [attr.aria-selected]="activeTabId === tabs.SHIPPING_TAB"
+                  [class.active]="activeTabId === tabs.SHIPPING_TAB"
+                  ><strong>Shipping Details</strong></a
+                >
+              </li>
+              <li
+                *ngIf="invoice"
+                class="nav-item cursor-pointer"
+                (click)="changeTab(tabs.REMARKS_TAB)"
+              >
+                <a
+                  class="nav-link"
+                  data-toggle="tab"
+                  role="button"
+                  [attr.aria-selected]="activeTabId === tabs.REMARKS_TAB"
+                  [class.active]="activeTabId === tabs.REMARKS_TAB"
+                  ><strong>Remarks</strong></a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <ng-container *ngIf="activeTabId === tabs.ITEM_TAB">
+          <div class="row col-lg-12 form-group"></div>
+          <div class="row">
+            <div class="col-lg-10"></div>
+            <div class="col-lg-2" style="text-align: right;">
+              <a href="javascript:void(0)" class="btn btn-primary" 
+                (click)="addItem()">
+                Add Item
+              </a>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-lg-12">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>
+                      Item code
+                    </th>
+                    <th>
+                      Description
+                    </th>
+                    <th>
+                      Quantity
+                    </th>
+                    <th>
+                      Unit
+                    </th>
+                    <th>
+                      Price
+                    </th>
+                    <th>
+                      Discount(%)
+                    </th>
+                    <th>
+                      Tax(%)
+                    </th>
+                    <th>
+                      Total
+                    </th>
+                    <th>
+                      Remove
+                    </th>
+                  </tr>
+                </thead>
+                <tbody> <!-- [formGroupName]="i" -->                
+                    <tr formArrayName="itemList"
+                    *ngFor="let item of invoiceForm.get('itemList')['controls']; let i = index;">
+                      <td [formGroupName]="i">
+                        <input
+                          type="text"
+                          class="form-control form-control-lg form-control-solid"
+                          autocomplete="off"
+                          placeholder="item code"
+                          name="itemCode"
+                          formControlName="itemCode"
+                        />
+                      </td>
+                      <td [formGroupName]="i">
+                        <input
+                          type="text"
+                          class="form-control form-control-lg form-control-solid"
+                          autocomplete="off"
+                          placeholder="description"
+                          name="description"
+                          formControlName="description"
+                        />
+                      </td>
+                      <td [formGroupName]="i">
+                        <input
+                          type="text"
+                          class="form-control form-control-lg form-control-solid"
+                          autocomplete="off"
+                          placeholder="quantity"
+                          name="quantity"
+                          formControlName="quantity"
+                          (keyup)="totalPrice(i)"
+                        />
+                      </td>
+                      <td [formGroupName]="i">
+                        <input
+                          type="text"
+                          class="form-control form-control-lg form-control-solid"
+                          autocomplete="off"
+                          placeholder="unit"
+                          name="unit"
+                          formControlName="unit"
+                        />
+                      </td>
+                      <td [formGroupName]="i">
+                        <input
+                          type="text"
+                          class="form-control form-control-lg form-control-solid"
+                          autocomplete="off"
+                          placeholder="price"
+                          name="price"
+                          formControlName="price"
+                          (keyup)="totalPrice(i)"
+                        />
+                      </td>
+                      <td [formGroupName]="i">
+                        <input
+                          type="text"
+                          class="form-control form-control-lg form-control-solid"
+                          autocomplete="off"
+                          placeholder="discount"
+                          name="discount"
+                          formControlName="discount"
+                          (keyup)="totalPrice(i)"
+                        />
+                      </td>
+                      <td [formGroupName]="i">
+                        <input
+                          type="text"
+                          class="form-control form-control-lg form-control-solid"
+                          autocomplete="off"
+                          placeholder="tax"
+                          name="tax"
+                          formControlName="tax"
+                          (keyup)="totalPrice(i)"
+                        />
+                      </td>
+                      <td [formGroupName]="i">
+                        <input
+                          type="text"
+                          class="form-control form-control-lg form-control-solid"
+                          autocomplete="off"
+                          placeholder="total"
+                          name="total"
+                          formControlName="total"
+                          disabled="true"
+                        />
+                      </td>
+                      <td [formGroupName]="i">
+                        <a href="javascript:void(0)" class="btn btn-danger" 
+                          (click)="removeItem(i)">
+                          Delete
+                        </a>
+                      </td>
+                    </tr>
+                  
+                </tbody>
+              </table>
+            </div>            
+            <div class="col-lg-11" style="text-align: right;">
+              <div>
+                <label><strong>Doc Total Before tax & discount: {{totalSumAmountBeforeTax}}</strong></label>
+              </div>
+              <div>
+                <label><strong>Discount %: {{totalDiscount}}</strong></label>
+              </div>
+              <div>
+                <label><strong>Tax: {{totalTax}}</strong></label>
+              </div>
+              <div>
+                <label><strong>Doc Total after tax & discount: {{totalAmountAfterTax}}</strong></label>
+              </div>
+            </div>            
+          </div>
+        </ng-container>
+
+        <ng-container
+          *ngIf="activeTabId === tabs.BILLING_TAB"
+        >
+          <div class="form-group row">
+            <div class="col-lg-4"> <h4>Billing Details:</h4></div>
+          </div>
+          <div class="form-group row">
+            <div class="col-lg-4">
+              <label>Billing Code</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Address Code"
+                name="billAddressCode"
+                [class.is-invalid]="isControlInvalid('billAddressCode')"
+                [class.is-valid]="isControlValid('billAddressCode')"
+                formControlName="billAddressCode"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('billAddressCode')">
+                Please enter Address Code
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('billAddressCode')">
+                Address Code was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'billAddressCode')"
+              >
+                Address Code is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'billAddressCode')"
+              >
+                Address Code should have at least 1 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'billAddressCode')"
+              >
+                Address Code should have maximum 100 symbols
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <label>Billing Address</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Billing Address"
+                name="billAddress"
+                [class.is-invalid]="isControlInvalid('billAddress')"
+                [class.is-valid]="isControlValid('billAddress')"
+                formControlName="billAddress"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('billAddress')">
+                Please enter Billing Address
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('billAddress')">
+                Billing Address was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'billAddress')"
+              >
+                Billing Address is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'billAddress')"
+              >
+                Billing Address should have at least 1 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'billAddress')"
+              >
+                Billing Address should have maximum 100 symbols
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>Billing City</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Billing City"
+                name="billCity"
+                [class.is-invalid]="isControlInvalid('billCity')"
+                [class.is-valid]="isControlValid('billCity')"
+                formControlName="billCity"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('billCity')">
+                Please enter Billing City
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('billCity')">
+                Billing City was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'billCity')"
+              >
+                Billing City is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'billCity')"
+              >
+                Billing City should have at least 1 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'billCity')"
+              >
+                Billing City should have maximum 100 symbols
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-lg-4">
+              <label>Billing State</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Billing State"
+                name="billState"
+                [class.is-invalid]="isControlInvalid('billState')"
+                [class.is-valid]="isControlValid('billState')"
+                formControlName="billState"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('billState')">
+                Please enter Billing State
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('billState')">
+                Billing State was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'billState')"
+              >
+                Billing State is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'billState')"
+              >
+                Billing State should have at least 1 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'billState')"
+              >
+                Billing State should have maximum 100 symbols
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <label>Billing Zip</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Billing Zip"
+                name="billZipCode"
+                [class.is-invalid]="isControlInvalid('billZipCode')"
+                [class.is-valid]="isControlValid('billZipCode')"
+                formControlName="billZipCode"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('billZipCode')">
+                Please enter Billing Zip
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('billZipCode')">
+                Billing Zip was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'billZipCode')"
+              >
+                Billing Zip is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'billZipCode')"
+              >
+                Billing Zip should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'billZipCode')"
+              >
+                Billing Zip should have maximum 6 symbols
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <label>Billing Country</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Billing Country"
+                name="billCountry"
+                [class.is-invalid]="isControlInvalid('billCountry')"
+                [class.is-valid]="isControlValid('billCountry')"
+                formControlName="billCountry"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('billCountry')">
+                Please enter Billing Country
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('billCountry')">
+                Billing Country was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'billCountry')"
+              >
+                Billing Country is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'billCountry')"
+              >
+                Billing Country should have at least 1 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'billCountry')"
+              >
+                Billing Country should have maximum 100 symbols
+              </div>
+            </div>
+          </div> 
+        </ng-container>
+
+        <ng-container
+          *ngIf="activeTabId === tabs.SHIPPING_TAB"
+        >
+          <div class="form-group row">
+            <div class="col-lg-4"> <h4>Shipping Details:</h4></div>
+          </div>
+          <div class="form-group row">
+            <div class="col-lg-4">
+              <label>Shipping Code</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Address Code"
+                name="shipAddressCode"
+                [class.is-invalid]="isControlInvalid('shipAddressCode')"
+                [class.is-valid]="isControlValid('shipAddressCode')"
+                formControlName="shipAddressCode"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('shipAddressCode')">
+                Please enter Address Code
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('shipAddressCode')">
+                Address Code was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'shipAddressCode')"
+              >
+                Address Code is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'shipAddressCode')"
+              >
+                Address Code should have at least 1 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'shipAddressCode')"
+              >
+                Address Code should have maximum 100 symbols
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <label>Shipping Address</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Shipping Address"
+                name="shipAddress"
+                [class.is-invalid]="isControlInvalid('shipAddress')"
+                [class.is-valid]="isControlValid('shipAddress')"
+                formControlName="shipAddress"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('shipAddress')">
+                Please enter Shipping Address
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('shipAddress')">
+                Shipping Address was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'shipAddress')"
+              >
+                Shipping Address is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'shipAddress')"
+              >
+                Shipping Address should have at least 1 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'shipAddress')"
+              >
+                Shipping Address should have maximum 100 symbols
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>Shipping City</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Shipping City"
+                name="shipCity"
+                [class.is-invalid]="isControlInvalid('shipCity')"
+                [class.is-valid]="isControlValid('shipCity')"
+                formControlName="shipCity"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('shipCity')">
+                Please enter Shipping City
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('shipCity')">
+                Shipping City was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'shipCity')"
+              >
+                Shipping City is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'shipCity')"
+              >
+                Shipping City should have at least 1 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'shipCity')"
+              >
+                Shipping City should have maximum 100 symbols
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-lg-4">
+              <label>Shipping State</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Shipping State"
+                name="shipState"
+                [class.is-invalid]="isControlInvalid('shipState')"
+                [class.is-valid]="isControlValid('shipState')"
+                formControlName="shipState"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('shipState')">
+                Please enter Shipping State
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('shipState')">
+                Shipping State was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'shipState')"
+              >
+                Shipping State is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'shipState')"
+              >
+                Shipping State should have at least 1 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'shipState')"
+              >
+                Shipping State should have maximum 100 symbols
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <label>Shipping Zip</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Shipping Zip"
+                name="shipZipCode"
+                [class.is-invalid]="isControlInvalid('shipZipCode')"
+                [class.is-valid]="isControlValid('shipZipCode')"
+                formControlName="shipZipCode"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('shipZipCode')">
+                Please enter Shipping Zip
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('shipZipCode')">
+                Shipping Zip was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'shipZipCode')"
+              >
+                Shipping Zip is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'shipZipCode')"
+              >
+                Shipping Zip should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'shipZipCode')"
+              >
+                Shipping Zip should have maximum 6 symbols
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <label>Shipping Country</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Shipping Country"
+                name="shipCountry"
+                [class.is-invalid]="isControlInvalid('shipCountry')"
+                [class.is-valid]="isControlValid('shipCountry')"
+                formControlName="shipCountry"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('shipCountry')">
+                Please enter Shipping Country
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('shipCountry')">
+                Shipping Country was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'shipCountry')"
+              >
+                Shipping Country is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'shipCountry')"
+              >
+                Shipping Country should have at least 1 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'shipCountry')"
+              >
+                Shipping Country should have maximum 100 symbols
+              </div>
+            </div>
+          </div> 
+        </ng-container>
+
+        <ng-container
+          *ngIf="activeTabId === tabs.REMARKS_TAB"
+        > 
+          <div class="form-group row">
+            <div class="col-lg-4"> <h4>Remarks Details:</h4></div>
+          </div>
+          <div class="form-group row">
+            <div class="col-lg-6">
+              <label>Remarks</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Remarks"
+                name="remarks"
+                [class.is-invalid]="isControlInvalid('remarks')"
+                [class.is-valid]="isControlValid('remarks')"
+                formControlName="remarks"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('remarks')">
+                Please enter remarks
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('remarks')">
+                Remarks was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'remarks')"
+              >
+                Remarks is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'remarks')"
+              >
+                Remarks should have at least 1 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'remarks')"
+              >
+                Remarks should have maximum 200 symbols
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <div class="row col-lg-12 form-group"></div>
+         <hr>
+        <div class="float-right">
+          <a
+            class="btn btn-default font-weight-bold mr-2"
+            routerLink="/ecommerce/salesinvoices"
+            >Cancel</a
+          >
+          <button
+            type="submit"
+            class="btn btn-primary font-weight-bold mr-2"
+            [disabled]="invoiceForm.invalid"
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

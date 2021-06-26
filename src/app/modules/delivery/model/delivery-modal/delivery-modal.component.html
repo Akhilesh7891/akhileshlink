@@ -1,0 +1,113 @@
+<div class="card card-custom gutter-b">
+<div class="card-body">
+    <ul class="nav nav-tabs nav-tabs-line" role="tablist">
+      <li class="nav-item cursor-pointer" (click)="changeTab(tabs.OrderTAble)">
+        <a
+          class="nav-link"
+          data-toggle="tab"
+          role="tab"
+          [attr.aria-selected]="activeTabId === tabs.OrderTAble"
+          [class.active]="activeTabId === tabs.OrderTAble"
+        >
+          Order Table Fields
+        </a>
+      </li>
+      <li
+        
+        class="nav-item cursor-pointer"
+        (click)="changeTab(tabs.additionalItems)"
+      >
+        <a
+          class="nav-link"
+          data-toggle="tab"
+          role="button"
+          [attr.aria-selected]="activeTabId === tabs.additionalItems"
+          [class.active]="activeTabId === tabs.additionalItems"
+          >Additional Items</a
+        >
+      </li>
+    </ul>
+
+    <ng-container *ngIf="activeTabId === tabs.OrderTAble">
+      <div class="mt-5">
+        <div class="table-responsive angular-bootstrap-table">
+            <table class="table table-head-custom table-vertical-center overflow-hidden">
+              <thead>
+                <th class="text-dark">
+                  Sales Order Code
+                  
+                </th>          
+                <th>
+                  Checkpoint Code
+                  
+                </th>
+                <th>
+                  Customer Code
+                  
+                </th>
+                <th>
+                  Customer Name
+                  
+                </th>
+                <th>
+                  Customer's Shipping Address
+                </th>
+                <th>
+                    Delivery Due Date
+                </th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of deliveryModalBind">
+                  <td>{{item.SalesOrderCode}}</td>
+                  <td>{{item.CheckpointCode}}</td>
+                  <td>{{item.CustomerCode}}</td>
+                  <td>{{item.CustomerName}}</td>  
+                  <td>{{item.CustomersShippingAddress}}</td>  
+                  <td>{{item.DeliveryDueDate}}</td>            
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      </div>
+    </ng-container>
+
+    <ng-container
+      *ngIf="activeTabId === tabs.additionalItems"
+    >
+    <div class="mt-5">
+      <div class="table-responsive angular-bootstrap-table">
+        <table class="table table-head-custom table-vertical-center overflow-hidden">
+            <thead>
+                <tr>
+                    <th class="text-dark">
+                        Item Code
+                    </th>          
+                    <th>
+                        Item Name
+                        
+                    </th>
+                    <th>
+                        Quantity
+                        
+                    </th>
+                    <th>
+                        Unit
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of additionalModalBind">
+                    <td>{{item.ItemCode}}</td>
+                    <td>{{item.ItemName}}</td>
+                    <td>{{item.Quantity}}</td>
+                    <td>{{item.Unit}}</td>  
+                  </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+      
+    </ng-container>
+    
+  </div>
+</div>  

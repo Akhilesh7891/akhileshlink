@@ -1,0 +1,138 @@
+<div class="card card-custom gutter-b">
+    <div class="card-header">
+      <div class="card-title">
+        <h3 class="card-label">Customer list</h3>
+      </div>
+      <div class="card-toolbar">
+        <!-- <button type="button" class="btn btn-primary" (click)="create()">New Customer</button> -->
+
+        <a
+        type="button"
+        class="btn btn-primary"
+        routerLink="/ecommerce/customer/add"
+        >New Customer</a
+      >
+      </div>
+    </div>
+    <div class="card-body">
+      <!-- begin: Filtration form -->
+      <div class="form form-label-right">
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <div class="row" [formGroup]="filterGroup">
+                <div class="col-lg-6" [formGroup]="searchGroup">
+                    <input type="text" class="form-control" name="searchText" placeholder="Search" value=""
+                      formControlName="searchTerm" /><small class="form-text text-muted"><b>Search</b> in all fields</small>
+                  </div>
+            
+            </div>
+          </div>
+         
+        </div>
+      </div>
+      <!-- end: Filtration form -->
+  
+      <!-- begin: Grouping -->
+      <ng-container *ngIf="grouping.getSelectedRowsCount()">
+        <div class="form">
+          <div class="row align-items-center form-group-actions margin-top-20 margin-bottom-20">
+            <div class="col-xl-12">
+              <div class="form-group form-group-inline">
+                <div class="form-label form-label-no-wrap">
+                  <label class="font-bold font-danger"><span>Selected records count:
+                      <b>{{ grouping.getSelectedRowsCount() }}</b></span></label>
+                </div>
+                <div>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <!-- end: Grouping -->
+  
+      <!-- begin:Table -->
+      <div class="table-responsive angular-bootstrap-table">
+        <table class="table table-head-custom table-vertical-center overflow-hidden">
+          <thead>
+            <th class="text-dark">
+            CUSTOMER CODE
+              <app-sort-icon column="ActivityCode" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+                (sort)="sort($event)"></app-sort-icon>
+            </th>
+            <th>
+              CUSTOMER TYPE
+              <app-sort-icon column="CustomerCode" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+                (sort)="sort($event)"></app-sort-icon>
+            </th>
+            <th>
+              CUSTOMER NAME
+              <app-sort-icon column="CustomerName" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+                (sort)="sort($event)"></app-sort-icon>
+            </th>
+  
+            <th>
+           RECENT ACTIVITY 
+              <app-sort-icon column="ActivityType" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+                (sort)="sort($event)"></app-sort-icon>
+            </th>
+            <th>
+                RECENT ORDER
+              <app-sort-icon column="ActivityDate" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+                (sort)="sort($event)"></app-sort-icon>
+            </th>
+            <th>
+                RECENT INVOICE
+              <app-sort-icon column="ActivityDate" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+                (sort)="sort($event)"></app-sort-icon>
+            </th>
+            <th>ACTIONS</th>
+          </thead>
+          <tbody>
+              <tr *ngFor="let item of customerService.items$ | async">
+                  <td>
+                    <a style="color: blue;cursor: pointer;"
+                    [routerLink]="'/ecommerce/customer-view/' + item.id"
+                    
+                    >{{item.CustomerCode}}</a></td>
+                  <td>{{item.CustomerType}}</td>
+                  <td>{{item.CustomerName}}</td>
+                  <td>{{item.RecentActivity| date }}</td>
+                  <td>{{item.RecentOrder | date }}</td>
+                  <td>{{item.RecentInvoice | date }}</td>
+                  <td>
+                    <!-- <a title="Edit item" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+                    (click)="edit(item.id)">
+                    <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
+                      class="svg-icon svg-icon-md svg-icon-primary">
+                    </span>
+                  </a> -->
+
+                  <a
+                  title="Edit customer"
+                  class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+                  [routerLink]="'/ecommerce/customer/edit/' + item.id"
+                >
+                <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
+                class="svg-icon svg-icon-md svg-icon-primary">
+              </span></a>
+    
+                  <!-- <a title="Delete item" class="btn btn-icon btn-light btn-hover-danger btn-sm"
+                    (click)="delete(item.id)">
+                    <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
+                      class="svg-icon svg-icon-md svg-icon-danger">
+                    </span>
+                  </a> -->
+                  </td>
+              </tr>
+             
+           
+          </tbody>
+        </table>
+      </div>
+      <!-- end: Table -->
+      <app-paginator class="d-flex justify-content-between align-items-center flex-wrap" [paginator]="paginator"
+        [isLoading]="isLoading" (paginate)="paginate($event)"></app-paginator>
+    </div>
+  </div>

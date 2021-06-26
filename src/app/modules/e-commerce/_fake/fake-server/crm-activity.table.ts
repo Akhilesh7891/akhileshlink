@@ -1,0 +1,55 @@
+export class CRMActivityTable {
+    public static crmActivity: any = [
+      {
+        id:1,
+        ActivityCode:'AC01',
+        ActivityDate:new Date(),
+        ActivityType :'Call',
+        AssignTo:'Rannn',
+        StartDate:new Date(),
+        Subject:'Test activity',
+        MeetingLocation:'Noida',
+        Remark:'Test Remarks',
+        Attachment:'',
+        CustomerCode:'CUST0001',
+        CustomerName:'Rannn',
+        ContactPerson:'Ravi',
+        MobileNumber:9811227777,
+        EndDate:new Date()
+      },
+      {
+        id:2,
+        ActivityCode:'AC01',
+        ActivityDate:new Date(),
+        ActivityType :'Meeting',
+        AssignTo:'Abie',
+        StartDate:new Date(),
+        Subject:'Test actsdfivity',
+        MeetingLocation:'Noisdfsdda',
+        Remark:'Test Remasdfrks',
+        Attachment:'',
+        CustomerCode:'CUST0002',
+        CustomerName:'AkhileshChaurasia',
+        ContactPerson:'Ravi',
+        MobileNumber:9811227777,
+        EndDate:new Date()
+      },
+      {
+        id:3,
+        ActivityCode:'AC01',
+        ActivityDate:new Date(),
+        ActivityType :'Task',
+        AssignTo:'Rannn',
+        StartDate:new Date(),
+        Subject:'Test activity',
+        MeetingLocation:'Noida sel',
+        Remark:'Test Remarksdfsdf',
+        Attachment:'',
+        CustomerCode:'CO123',
+        CustomerName:'Rk Chauhan',
+        ContactPerson:'Ravi',
+        MobileNumber:9811227777,
+        EndDate:new Date()
+      },
+    ]
+}

@@ -1,0 +1,267 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <ng-container *ngIf="banking">
+        <ng-container *ngIf="banking.id">Edit</ng-container>
+        <ng-container *ngIf="!banking.id">Create</ng-container>
+        Banking
+        <ng-container *ngIf="banking.id"
+          >'{{ banking.employeeCode }}' - {{ banking.employeeName }}</ng-container
+        >
+      </ng-container>
+    </div>
+  </div>
+  <div
+    class="overlay overlay-block cursor-default modal-body"
+    style="min-height: 404px"
+  >
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="overlay-layer bg-transparent">
+        <div class="spinner spinner-lg spinner-success"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="banking">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label class="form-label">Employee Code</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="employeeCode"
+              placeholder="Employee Code"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('employeeCode')"
+              [class.is-valid]="isControlValid('employeeCode')"
+              formControlName="employeeCode"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('employeeCode')">
+              Employee Code was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'employeeCode')"
+            >
+              Employee Code is required
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <label class="form-label">Employee Name</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="employeeName"
+              placeholder="Employee Name"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('employeeName')"
+              [class.is-valid]="isControlValid('employeeName')"
+              formControlName="employeeName"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('employeeName')">
+              Employee Name was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'employeeName')"
+            >
+              Employee Name is required
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label">Doc No.</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="docNo"
+              placeholder="Doc No."
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('docNo')"
+              [class.is-valid]="isControlValid('docNo')"
+              formControlName="docNo"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('docNo')">
+              Doc No was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'docNo')"
+            >
+              Doc No is required
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-xl-4">
+            <label>Date</label>
+            <div class="input-group input-group-solid">
+              <input type="text" name="date" class="form-control form-control-lg form-control-solid"
+                autocomplete="off" placeholder="dd/mm/yyyy" ngbDatepicker #d="ngbDatepicker"
+                [class.is-invalid]="isControlInvalid('date')" [class.is-valid]="isControlValid('date')"
+                formControlName="date" readonly="true" />
+              <div class="input-group-append" (click)="d.toggle()">
+                <span class="input-group-text">
+                  <i class="text-dark-50 flaticon-calendar"></i>
+                </span>
+              </div>
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('date')">date was entered correct</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'date')">Please enter date in
+              'mm/dd/yyyy' format</div>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label">Location</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="location"
+              placeholder="Location"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('location')"
+              [class.is-valid]="isControlValid('location')"
+              formControlName="location"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('location')">
+              Employee Name was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'location')"
+            >
+              Employee Name is required
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label">Amount Deposit</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="amountDeposit"
+              placeholder="amount deposit"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('amountDeposit')"
+              [class.is-valid]="isControlValid('amountDeposit')"
+              formControlName="amountDeposit"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('amountDeposit')">
+              Employee Name was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'amountDeposit')"
+            >
+              Employee Name is required
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-4">
+            <label>Deposit Date</label>
+            <div class="input-group input-group-solid">
+              <input type="text" name="depositDate" class="form-control form-control-lg form-control-solid"
+                autocomplete="off" placeholder="dd/mm/yyyy" ngbDatepicker #d="ngbDatepicker"
+                [class.is-invalid]="isControlInvalid('depositDate')" [class.is-valid]="isControlValid('depositDate')"
+                formControlName="depositDate" readonly="true" />
+              <div class="input-group-append" (click)="d.toggle()">
+                <span class="input-group-text">
+                  <i class="text-dark-50 flaticon-calendar"></i>
+                </span>
+              </div>
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('depositDate')">depositDate was entered correct</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'depositDate')">Please enter depositDate in
+              'mm/dd/yyyy' format</div>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label">Bank Branch</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="bankBranch"
+              placeholder="bank branch"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('bankBranch')"
+              [class.is-valid]="isControlValid('bankBranch')"
+              formControlName="bankBranch"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('bankBranch')">
+              Employee Name was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'bankBranch')"
+            >
+              Employee Name is required
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label">Remarks</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="remarks"
+              placeholder="remarks"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('remarks')"
+              [class.is-valid]="isControlValid('remarks')"
+              formControlName="remarks"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('remarks')">
+              Employee Name was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'remarks')"
+            >
+              Employee Name is required
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4">
+            <label class="form-label">Employee Signature</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="employeeSignature"
+              placeholder="employee signature"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('employeeSignature')"
+              [class.is-valid]="isControlValid('employeeSignature')"
+              formControlName="employeeSignature"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('employeeSignature')">
+              Employee Name was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'employeeSignature')"
+            >
+              Employee Name is required
+            </div>
+          </div>
+        </div>
+      </form>
+    </ng-container>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light btn-elevate mr-2"
+      (click)="modal.dismiss()"
+    >
+      Cancel
+    </button>
+    <ng-container *ngIf="banking">
+      <button
+        type="submit"
+        class="btn btn-primary btn-elevate"
+        (click)="save()"
+        [disabled]="formGroup.invalid"
+      >
+        Save
+      </button>
+    </ng-container>
+  </div>
+</div>

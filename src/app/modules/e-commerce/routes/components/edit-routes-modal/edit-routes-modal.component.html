@@ -1,0 +1,235 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <ng-container *ngIf="routes">
+        <ng-container *ngIf="routes.id">Edit</ng-container>
+        <ng-container *ngIf="!routes.id">Create</ng-container>
+        Route
+        <ng-container *ngIf="routes.id"
+          >'{{ routes.routeName }}'</ng-container
+        >
+      </ng-container>
+    </div>
+  </div>
+  <div
+    class="overlay overlay-block cursor-default modal-body"
+    style="min-height: 404px"
+  >
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="overlay-layer bg-transparent">
+        <div class="spinner spinner-lg spinner-success"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="routes">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">
+        
+        
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label class="form-label">Route Name</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="routeName"
+              placeholder="Routes name"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('routeName')"
+              [class.is-valid]="isControlValid('routeName')"
+              formControlName="routeName"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('routeName')">
+              Route name was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'routeName')"
+            >
+              Route name is required
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <label class="form-label">Route Code</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="routeCode"
+              placeholder="Routes Code"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('routeCode')"
+              [class.is-valid]="isControlValid('routeCode')"
+              formControlName="routeCode"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('routeCode')">
+              Routes code was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'routeCode')"
+            >
+              Routes code is required
+            </div>
+          </div>
+          
+          <div class="col-lg-4">
+            <label class="form-label">Route Type</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="routeType"
+              placeholder="Route typ"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('routeType')"
+              [class.is-valid]="isControlValid('routeType')"
+              formControlName="routeType"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('routeType')">
+              Route type was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'routeType')"
+            >
+              Route type is required
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label class="form-label">Start Location</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="startLocation"
+              placeholder="Start Location"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('startLocation')"
+              [class.is-valid]="isControlValid('startLocation')"
+              formControlName="startLocation"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('startLocation')">
+              Start location was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'startLocation')"
+            >
+              Start location is required
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label">End Location</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="endLocation"
+              placeholder="End Location"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('endLocation')"
+              [class.is-valid]="isControlValid('endLocation')"
+              formControlName="endLocation"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('endLocation')">
+              End location was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'endLocation')"
+            >
+              End location is required
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <label class="form-label">Check Points</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="checkPoints"
+              placeholder="check points"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('checkPoints')"
+              [class.is-valid]="isControlValid('checkPoints')"
+              formControlName="checkPoints"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('checkPoints')">
+              Check points was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'checkPoints')"
+            >
+              Check points is required
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+
+          <div class="col-lg-4">
+            <label class="form-label">Distance</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="distance"
+              placeholder="Distance"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('distance')"
+              [class.is-valid]="isControlValid('distance')"
+              formControlName="distance"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('distance')">
+              Distance was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'distance')"
+            >
+              Distance is required
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <label>Status</label>
+            <select
+              class="form-control form-control-lg form-control-solid"
+              name="status"
+              [class.is-invalid]="isControlInvalid('status')"
+              formControlName="status"
+            >
+              <option value="0">Active</option>
+              <option value="1">Inactive</option>
+            </select>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'status')"
+            >
+              Status is required
+            </div>
+          </div> 
+        </div>
+      </form>
+    </ng-container>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light btn-elevate mr-2"
+      (click)="modal.dismiss()"
+    >
+      Cancel
+    </button>
+    <ng-container *ngIf="routes">
+      <button
+        type="submit"
+        class="btn btn-primary btn-elevate"
+        (click)="save()"
+        [disabled]="formGroup.invalid"
+      >
+        Save
+      </button>
+    </ng-container>
+  </div>
+</div>

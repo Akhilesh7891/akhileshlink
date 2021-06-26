@@ -1,0 +1,338 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      View Item:
+    </div>
+  </div>
+  <div
+    class="overlay overlay-block cursor-default modal-body"
+    style="min-height: 404px"
+  >
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="overlay-layer bg-transparent">
+        <div class="spinner spinner-lg spinner-success"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="item">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">        
+        
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label class="form-label">Item Code</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="itemCode"
+              placeholder="item Code"
+              readonly="true"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('itemCode')"
+              [class.is-valid]="isControlValid('itemCode')"
+              formControlName="itemCode"
+            />
+          </div>
+
+          <div class="col-lg-4">
+            <label class="form-label">Item Name</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="itemName"
+              placeholder="item Code"
+              readonly="true"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('itemName')"
+              [class.is-valid]="isControlValid('itemName')"
+              formControlName="itemName"
+            />
+          </div>
+
+          <div class="col-lg-4">
+            <label class="form-label">Description</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="description"
+              placeholder="item Code"
+              readonly="true"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('description')"
+              [class.is-valid]="isControlValid('description')"
+              formControlName="description"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4">
+            <label class="form-label">Item Group</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="itemGroup"
+              placeholder="item Code"
+              readonly="true"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('itemGroup')"
+              [class.is-valid]="isControlValid('itemGroup')"
+              formControlName="itemGroup"
+            />
+          </div>
+
+          <div class="col-lg-4">
+            <label class="form-label">Sales Item</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="salesItem"
+              placeholder="item Code"
+              readonly="true"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('salesItem')"
+              [class.is-valid]="isControlValid('salesItem')"
+              formControlName="salesItem"
+            />
+          </div>
+
+          <div class="col-lg-4">
+            <label class="form-label">Inventory</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="inventory"
+              placeholder="item Code"
+              readonly="true"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('inventory')"
+              [class.is-valid]="isControlValid('inventory')"
+              formControlName="inventory"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4">
+            <label class="form-label">In Stock</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="inStock"
+              placeholder="item Code"
+              readonly="true"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('inStock')"
+              [class.is-valid]="isControlValid('inStock')"
+              formControlName="inStock"
+            />
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label">committed</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="committed"
+              placeholder="item Code"
+              readonly="true"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('committed')"
+              [class.is-valid]="isControlValid('committed')"
+              formControlName="committed"
+            />
+          </div>
+
+          <div class="col-lg-4">
+            <label class="form-label">onOrder</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="onOrder"
+              placeholder="item Code"
+              readonly="true"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('onOrder')"
+              [class.is-valid]="isControlValid('onOrder')"
+              formControlName="onOrder"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+            <label class="form-label">salesUnit</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="salesUnit"
+              placeholder="item Code"
+              readonly="true"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('salesUnit')"
+              [class.is-valid]="isControlValid('salesUnit')"
+              formControlName="salesUnit"
+            />
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label">salesUoM</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="salesUoM"
+              placeholder="item Code"
+              readonly="true"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('salesUoM')"
+              [class.is-valid]="isControlValid('salesUoM')"
+              formControlName="salesUoM"
+            />
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label">salesUnitVolume</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="salesUnitVolume"
+              placeholder="item Code"
+              readonly="true"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('salesUnitVolume')"
+              [class.is-valid]="isControlValid('salesUnitVolume')"
+              formControlName="salesUnitVolume"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4">
+            <label class="form-label">salesUoMVolume</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="salesUoMVolume"
+              placeholder="item Code"
+              readonly="true"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('salesUoMVolume')"
+              [class.is-valid]="isControlValid('salesUoMVolume')"
+              formControlName="salesUoMVolume"
+            />
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label">retailPrice</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="retailPrice"
+              placeholder="item Code"
+              readonly="true"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('retailPrice')"
+              [class.is-valid]="isControlValid('retailPrice')"
+              formControlName="retailPrice"
+            />
+          </div>
+
+          <div class="col-lg-4">
+            <label class="form-label">wholesalePrice</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="wholesalePrice"
+              placeholder="item Code"
+              readonly="true"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('wholesalePrice')"
+              [class.is-valid]="isControlValid('wholesalePrice')"
+              formControlName="wholesalePrice"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4">
+            <label class="form-label">noOfItems</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="noOfItems"
+              placeholder="item Code"
+              readonly="true"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('noOfItems')"
+              [class.is-valid]="isControlValid('noOfItems')"
+              formControlName="noOfItems"
+            />
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label">itemRemarks</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="itemRemarks"
+              placeholder="item Code"
+              readonly="true"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('itemRemarks')"
+              [class.is-valid]="isControlValid('itemRemarks')"
+              formControlName="itemRemarks"
+            />
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label">manageBatchNo</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="manageBatchNo"
+              placeholder="item Code"
+              readonly="true"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('manageBatchNo')"
+              [class.is-valid]="isControlValid('manageBatchNo')"
+              formControlName="manageBatchNo"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4">
+            <label class="form-label">activeFrom</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="activeFrom"
+              placeholder="item Code"
+              readonly="true"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('activeFrom')"
+              [class.is-valid]="isControlValid('activeFrom')"
+              formControlName="activeFrom"
+            />
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label">activeTo</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="activeTo"
+              placeholder="item Code"
+              readonly="true"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('activeTo')"
+              [class.is-valid]="isControlValid('activeTo')"
+              formControlName="activeTo"
+            />
+          </div>
+        </div>
+
+      </form>
+    </ng-container>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light btn-elevate mr-2"
+      (click)="modal.dismiss()"
+    >
+      Cancel
+    </button>
+  </div>
+</div>

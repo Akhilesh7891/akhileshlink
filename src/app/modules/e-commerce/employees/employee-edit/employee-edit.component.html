@@ -1,0 +1,1769 @@
+<div class="card card-custom gutter-b">
+  <ng-container *ngIf="isLoading$ | async">
+    <div class="progress progress-modal">
+      <div
+        class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
+        role="progressbar"
+        style="width: 100%"
+        aria-valuenow="100"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      ></div>
+    </div>
+  </ng-container>
+
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">
+        <ng-container *ngIf="employee">
+          {{ id ? "Edit" : "New" }} employee
+          <span *ngIf="employee && employee.id"
+            >'{{ employee.employeeCode }} -
+            {{ employee.firstName }} {{ employee.lastName }}'</span
+          >
+        </ng-container>
+      </h3>
+    </div>
+    <div class="card-toolbar">
+      <a type="button" class="btn btn-light" routerLink="/ecommerce/employees">
+        <i class="fa fa-arrow-left"></i>Back
+      </a>
+      <!-- <button class="btn btn-secondary ml-2" (click)="reset()">
+        <i class="fa fa-redo"></i>Reset
+      </button> -->
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="nav nav-tabs nav-tabs-line" role="tablist">
+      <li class="nav-item cursor-pointer" (click)="changeTab(tabs.BASIC_TAB)">
+        <a
+          class="nav-link"
+          data-toggle="tab"
+          role="tab"
+          [attr.aria-selected]="activeTabId === tabs.BASIC_TAB"
+          [class.active]="activeTabId === tabs.BASIC_TAB"
+        >
+          Personal Details
+        </a>
+      </li>
+      <li
+        *ngIf="employee && employee.id"
+        class="nav-item cursor-pointer"
+        (click)="changeTab(tabs.ORG_DETAILS)"
+      >
+        <a
+          class="nav-link"
+          data-toggle="tab"
+          role="button"
+          [attr.aria-selected]="activeTabId === tabs.ORG_DETAILS"
+          [class.active]="activeTabId === tabs.ORG_DETAILS"
+          >Organizational Details</a
+        >
+      </li>
+      <li
+        *ngIf="employee && employee.id"
+        class="nav-item cursor-pointer"
+        (click)="changeTab(tabs.GOV_DETAILS)"
+      >
+        <a
+          class="nav-link"
+          data-toggle="tab"
+          role="tab"
+          [attr.aria-selected]="activeTabId === tabs.GOV_DETAILS"
+          [class.active]="activeTabId === tabs.GOV_DETAILS"
+          >Government ID</a
+        >
+      </li>
+      <li
+        *ngIf="employee && employee.id"
+        class="nav-item cursor-pointer"
+        (click)="changeTab(tabs.WORK_DETAILS)"
+      >
+        <a
+          class="nav-link"
+          data-toggle="tab"
+          role="tab"
+          [attr.aria-selected]="activeTabId === tabs.WORK_DETAILS"
+          [class.active]="activeTabId === tabs.WORK_DETAILS"
+          >Work Details</a
+        >
+      </li>
+      <li
+        *ngIf="employee && employee.id"
+        class="nav-item cursor-pointer"
+        (click)="changeTab(tabs.HOME_DETAILS)"
+      >
+        <a
+          class="nav-link"
+          data-toggle="tab"
+          role="tab"
+          [attr.aria-selected]="activeTabId === tabs.HOME_DETAILS"
+          [class.active]="activeTabId === tabs.HOME_DETAILS"
+          >Home Details</a
+        >
+      </li>
+      <li
+        *ngIf="employee && employee.id"
+        class="nav-item cursor-pointer"
+        (click)="changeTab(tabs.IMEI_DETAILS)"
+      >
+        <a
+          class="nav-link"
+          data-toggle="tab"
+          role="tab"
+          [attr.aria-selected]="activeTabId === tabs.IMEI_DETAILS"
+          [class.active]="activeTabId === tabs.IMEI_DETAILS"
+          >IMEI Code</a
+        >
+      </li>
+    </ul>
+
+    <ng-container *ngIf="activeTabId === tabs.BASIC_TAB">
+      <div class="mt-5" *ngIf="employee">
+        <form
+          action="#"
+          class="form form-label-right"
+          [formGroup]="formGroup"
+          (ngSubmit)="save()"
+        >
+          <div class="form-group row">
+            <div class="col-lg-4">
+              <label>Employee Code</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="EmployeeCode"
+                name="employeeCode"
+                [class.is-invalid]="isControlInvalid('employeeCode')"
+                [class.is-valid]="isControlValid('employeeCode')"
+                formControlName="employeeCode"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('employeeCode')">
+                Please enter Employee Code
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('employeeCode')">
+                Employee Code was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'employeeCode')"
+              >
+                Employee Code is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'employeeCode')"
+              >
+                Employee Code should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'employeeCode')"
+              >
+                Employee Code should have maximum 100 symbols
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>First Name</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="First Name"
+                name="firstName"
+                [class.is-invalid]="isControlInvalid('firstName')"
+                [class.is-valid]="isControlValid('firstName')"
+                formControlName="firstName"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('firstName')">
+                Please enter first name
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('firstName')">
+                First Name was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'firstName')"
+              >
+                First Name is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'firstName')"
+              >
+                First Name should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'firstName')"
+              >
+                First Name should have maximum 100 symbols
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>Last Name</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Last Name"
+                name="lastName"
+                [class.is-invalid]="isControlInvalid('lastName')"
+                [class.is-valid]="isControlValid('lastName')"
+                formControlName="lastName"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('lastName')">
+                Please enter last name
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('lastName')">
+                Last Name was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'lastName')"
+              >
+                Last Name is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'lastName')"
+              >
+                Last Name should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'lastName')"
+              >
+                Last Name should have maximum 100 symbols
+              </div>
+            </div>            
+          </div>
+         
+          <div class="form-group row">
+            <div class="col-lg-4">
+              <label>Email</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Email"
+                name="email"
+                [class.is-invalid]="isControlInvalid('email')"
+                [class.is-valid]="isControlValid('email')"
+                formControlName="email"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('email')">
+                Please enter email
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('email')">
+                Email was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'email')"
+              >
+                Email is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'email')"
+              >
+                Email should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'email')"
+              >
+                Email should have maximum 100 symbols
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>Mobile</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Mobile"
+                name="phone"
+                [class.is-invalid]="isControlInvalid('phone')"
+                [class.is-valid]="isControlValid('phone')"
+                formControlName="phone"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('phone')">
+                Please enter Mobile
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('phone')">
+                Email was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'phone')"
+              >
+                Mobile is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'phone')"
+              >
+                Mobile should have at least 10 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'phone')"
+              >
+                Mobile should have maximum 10 symbols
+              </div>
+            </div>
+
+            <div class="col-xl-4">
+            <label>Date Of Birth</label>
+            <div class="input-group input-group-solid">
+              <input type="text" name="DOB" class="form-control form-control-lg form-control-solid"
+                autocomplete="off" placeholder="dd/mm/yyyy" ngbDatepicker #d="ngbDatepicker"
+                [class.is-invalid]="isControlInvalid('DOB')" [class.is-valid]="isControlValid('DOB')"
+                formControlName="DOB" readonly="true" />
+              <div class="input-group-append" (click)="d.toggle()">
+                <span class="input-group-text">
+                  <i class="text-dark-50 flaticon-calendar"></i>
+                </span>
+              </div>
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('DOB')">DOB was entered correct</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'DOB')">Please enter DOB in
+              'mm/dd/yyyy' format</div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-lg-4">
+              <label>Gender</label>
+              <select
+                class="form-control form-control-lg form-control-solid"
+                name="status"
+                formControlName="gender"
+              >
+                <option value="1">Male</option>
+                <option value="1">Female</option>
+              </select>
+              <div class="feedback">Please select gender</div>
+            </div>
+            <div class="col-lg-4">
+              <label>Father's Name</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Father Name"
+                name="fatherName"
+                [class.is-invalid]="isControlInvalid('fatherName')"
+                [class.is-valid]="isControlValid('fatherName')"
+                formControlName="fatherName"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('fatherName')">
+                Please enter father name
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('fatherName')">
+                Father's Name was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'fatherName')"
+              >
+                Father's Name is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'fatherName')"
+              >
+                Father's Name should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'fatherName')"
+              >
+                Father's Name should have maximum 100 symbols
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>Blood Group</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Blood Group"
+                name="bloodGroup"
+                [class.is-invalid]="isControlInvalid('bloodGroup')"
+                [class.is-valid]="isControlValid('bloodGroup')"
+                formControlName="bloodGroup"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('bloodGroup')">
+                Please enter father name
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('bloodGroup')">
+                Blood Group was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'bloodGroup')"
+              >
+                Blood Group is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'bloodGroup')"
+              >
+                Blood Group should have at least 1 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'bloodGroup')"
+              >
+                Blood Group should have maximum 10 symbols
+              </div>
+            </div>
+
+          </div>          
+          
+          <div class="float-right">
+            <a
+              class="btn btn-default font-weight-bold mr-2"
+              routerLink="/ecommerce/employees"
+              >Cancel</a
+            >
+            <button
+              type="submit"
+              class="btn btn-primary font-weight-bold mr-2"
+              [disabled]="formGroup.invalid"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </ng-container>
+
+    <ng-container
+      *ngIf="activeTabId === tabs.ORG_DETAILS && employee && employee.id"
+    >
+      <div class="mt-5" *ngIf="employee">
+        <form
+          action="#"
+          class="form form-label-right"
+          [formGroup]="formGroup"
+          (ngSubmit)="save()"
+        >
+          <div class="form-group row">
+            <div class="col-lg-4">
+              <label>Designation</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Designation"
+                name="designation"
+                [class.is-invalid]="isControlInvalid('designation')"
+                [class.is-valid]="isControlValid('designation')"
+                formControlName="designation"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('designation')">
+                Please enter designation
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('designation')">
+                Designation was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'designation')"
+              >
+                Designation is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'designation')"
+              >
+                Designation should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'designation')"
+              >
+                Designation should have maximum 100 symbols
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>Department</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Department"
+                name="department"
+                [class.is-invalid]="isControlInvalid('department')"
+                [class.is-valid]="isControlValid('department')"
+                formControlName="department"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('department')">
+                Please enter department
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('department')">
+                Department was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'department')"
+              >
+                Department is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'department')"
+              >
+                Department should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'department')"
+              >
+                Department should have maximum 100 symbols
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>Barnch</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Branch Name"
+                name="branch"
+                [class.is-invalid]="isControlInvalid('branch')"
+                [class.is-valid]="isControlValid('branch')"
+                formControlName="branch"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('branch')">
+                Please enter branch
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('branch')">
+                Barnch Name was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'branch')"
+              >
+                Barnch Name is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'branch')"
+              >
+                Barnch Name should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'branch')"
+              >
+                Barnch Name should have maximum 100 symbols
+              </div>
+            </div>            
+          </div>
+
+          <div class="form-group row">
+            <div class="col-lg-4">
+              <label>Cash Limit</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Designation"
+                name="cashLimit"
+                [class.is-invalid]="isControlInvalid('cashLimit')"
+                [class.is-valid]="isControlValid('cashLimit')"
+                formControlName="cashLimit"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('cashLimit')">
+                Please enter cashLimit
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('cashLimit')">
+                Cash Limit was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'cashLimit')"
+              >
+                Cash Limit is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'cashLimit')"
+              >
+                Cash Limit should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'cashLimit')"
+              >
+                Cash Limit should have maximum 100 symbols
+              </div>
+            </div>
+          </div>
+          
+          <div class="float-right">
+            <a
+              class="btn btn-default font-weight-bold mr-2"
+              routerLink="/ecommerce/employees"
+              >Cancel</a
+            >
+            <button
+              type="submit"
+              class="btn btn-primary font-weight-bold mr-2"
+              [disabled]="formGroup.invalid"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </ng-container>
+
+    <ng-container
+      *ngIf="activeTabId === tabs.GOV_DETAILS && employee && employee.id"
+    >
+      <div class="mt-5" *ngIf="employee">
+        <form
+          action="#"
+          class="form form-label-right"
+          [formGroup]="formGroup"
+          (ngSubmit)="save()"
+        >
+          <div class="form-group row">
+            <div class="col-lg-4">
+              <label>Citizenship</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="citizenship"
+                name="citizenship"
+                [class.is-invalid]="isControlInvalid('citizenship')"
+                [class.is-valid]="isControlValid('citizenship')"
+                formControlName="citizenship"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('citizenship')">
+                Please enter Citizenship
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('citizenship')">
+                Citizenship was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'citizenship')"
+              >
+                Citizenship is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'citizenship')"
+              >
+                Citizenship should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'citizenship')"
+              >
+                Employee Code should have maximum 100 symbols
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>DL Number</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="DL Number"
+                name="dlNumber"
+                [class.is-invalid]="isControlInvalid('dlNumber')"
+                [class.is-valid]="isControlValid('dlNumber')"
+                formControlName="dlNumber"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('dlNumber')">
+                Please enter DL Number
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('dlNumber')">
+                DL Number was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'dlNumber')"
+              >
+                DL Number is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'dlNumber')"
+              >
+                DL Number should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'dlNumber')"
+              >
+                DL Number should have maximum 100 symbols
+              </div>
+            </div>
+
+            <div class="col-xl-4">
+            <label>DL Expiry Date</label>
+            <div class="input-group input-group-solid">
+              <input type="text" name="dlExpiryDate" class="form-control form-control-lg form-control-solid"
+                autocomplete="off" placeholder="dd/mm/yyyy" ngbDatepicker #d="ngbDatepicker"
+                [class.is-invalid]="isControlInvalid('dlExpiryDate')" [class.is-valid]="isControlValid('dlExpiryDate')"
+                formControlName="dlExpiryDate" readonly="true" />
+              <div class="input-group-append" (click)="d.toggle()">
+                <span class="input-group-text">
+                  <i class="text-dark-50 flaticon-calendar"></i>
+                </span>
+              </div>
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('dlExpiryDate')">DL Expiry Date was entered correct</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'dlExpiryDate')">Please enter DL Expiry Date in
+              'mm/dd/yyyy' format</div>
+            </div>            
+          </div>
+         
+          <div class="form-group row">
+            <div class="col-lg-4">
+              <label>Passport No</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Father Name"
+                name="passportNo"
+                [class.is-invalid]="isControlInvalid('passportNo')"
+                [class.is-valid]="isControlValid('passportNo')"
+                formControlName="passportNo"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('passportNo')">
+                Please enter father name
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('passportNo')">
+                Passport No was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'passportNo')"
+              >
+                Passport No is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'passportNo')"
+              >
+                Passport No should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'passportNo')"
+              >
+                Passport No should have maximum 100 symbols
+              </div>
+            </div>
+
+            <div class="col-xl-4">
+            <label>Passport Expiry Date</label>
+            <div class="input-group input-group-solid">
+              <input type="text" name="passportExpiryDate" class="form-control form-control-lg form-control-solid"
+                autocomplete="off" placeholder="dd/mm/yyyy" ngbDatepicker #d="ngbDatepicker"
+                [class.is-invalid]="isControlInvalid('passportExpiryDate')" [class.is-valid]="isControlValid('passportExpiryDate')"
+                formControlName="passportExpiryDate" readonly="true" />
+              <div class="input-group-append" (click)="d.toggle()">
+                <span class="input-group-text">
+                  <i class="text-dark-50 flaticon-calendar"></i>
+                </span>
+              </div>
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('passportExpiryDate')">Passport Expiry Date was entered correct</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'passportExpiryDate')">Please enter Passport Expiry Date in
+              'mm/dd/yyyy' format</div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-lg-4">
+              <label>First Gov ID No</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="First Gov ID No"
+                name="firstGovIDNo"
+                [class.is-invalid]="isControlInvalid('firstGovIDNo')"
+                [class.is-valid]="isControlValid('firstGovIDNo')"
+                formControlName="firstGovIDNo"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('firstGovIDNo')">
+                Please enter First Gov ID No
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('firstGovIDNo')">
+                First Gov ID No was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'firstGovIDNo')"
+              >
+                First Gov ID No is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'firstGovIDNo')"
+              >
+                First Gov ID No should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'firstGovIDNo')"
+              >
+                First Gov ID No should have maximum 100 symbols
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>Second Gov ID No</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Second Gov ID No"
+                name="secondGovIDNo"
+                [class.is-invalid]="isControlInvalid('secondGovIDNo')"
+                [class.is-valid]="isControlValid('secondGovIDNo')"
+                formControlName="secondGovIDNo"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('secondGovIDNo')">
+                Please enter Second Gov ID No
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('secondGovIDNo')">
+                Second Gov ID No was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'secondGovIDNo')"
+              >
+                Second Gov ID No is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'secondGovIDNo')"
+              >
+                Second Gov ID No should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'secondGovIDNo')"
+              >
+                Second Gov ID No should have maximum 100 symbols
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>Third Gov ID No</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Third Gov ID No"
+                name="thirdGovIDNo"
+                [class.is-invalid]="isControlInvalid('thirdGovIDNo')"
+                [class.is-valid]="isControlValid('thirdGovIDNo')"
+                formControlName="thirdGovIDNo"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('thirdGovIDNo')">
+                Please enter Third Gov ID No
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('thirdGovIDNo')">
+                Third Gov ID No was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'thirdGovIDNo')"
+              >
+                Third Gov ID No is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'thirdGovIDNo')"
+              >
+                Third Gov ID No should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'thirdGovIDNo')"
+              >
+                Third Gov ID No should have maximum 100 symbols
+              </div>
+            </div>
+
+          </div>
+
+          <div class="form-group row">
+            <div class="col-lg-4">
+              <label>First Gov ID Type</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="First Gov ID Type"
+                name="firstGovIDType"
+                [class.is-invalid]="isControlInvalid('firstGovIDType')"
+                [class.is-valid]="isControlValid('firstGovIDType')"
+                formControlName="firstGovIDType"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('firstGovIDType')">
+                Please enter First Gov ID Type
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('firstGovIDType')">
+                First Gov ID Type was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'firstGovIDType')"
+              >
+                First Gov ID Type is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'firstGovIDType')"
+              >
+                First Gov ID Type should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'firstGovIDType')"
+              >
+                First Gov ID Type should have maximum 100 symbols
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>Second Gov ID Type</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Second Gov ID Type"
+                name="secondGovIDType"
+                [class.is-invalid]="isControlInvalid('secondGovIDType')"
+                [class.is-valid]="isControlValid('secondGovIDType')"
+                formControlName="secondGovIDType"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('secondGovIDType')">
+                Please enter Second Gov ID Type
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('secondGovIDType')">
+                Second Gov ID Type was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'secondGovIDType')"
+              >
+                Second Gov ID Type is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'secondGovIDType')"
+              >
+                Second Gov ID Type should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'secondGovIDType')"
+              >
+                Second Gov ID Type should have maximum 100 symbols
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>Third Gov ID Type</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Third Gov ID Type"
+                name="thirdGovIDType"
+                [class.is-invalid]="isControlInvalid('thirdGovIDType')"
+                [class.is-valid]="isControlValid('thirdGovIDType')"
+                formControlName="thirdGovIDType"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('thirdGovIDType')">
+                Please enter Third Gov ID Type
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('thirdGovIDType')">
+                Third Gov ID Type was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'thirdGovIDType')"
+              >
+                Third Gov ID Type is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'thirdGovIDType')"
+              >
+                Third Gov ID Type should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'thirdGovIDType')"
+              >
+                Third Gov ID Type should have maximum 100 symbols
+              </div>
+            </div>
+
+          </div>
+
+          
+          <div class="float-right">
+            <a
+              class="btn btn-default font-weight-bold mr-2"
+              routerLink="/ecommerce/employees"
+              >Cancel</a
+            >
+            <button
+              type="submit"
+              class="btn btn-primary font-weight-bold mr-2"
+              [disabled]="formGroup.invalid"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </ng-container>
+
+    <ng-container
+      *ngIf="activeTabId === tabs.WORK_DETAILS && employee && employee.id"
+    >
+      <div class="mt-5" *ngIf="employee">
+        <form
+          action="#"
+          class="form form-label-right"
+          [formGroup]="formGroup"
+          (ngSubmit)="save()"
+        >
+          <div class="form-group row">
+            <div class="col-lg-4">
+              <label>Work Address</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Work Address"
+                name="workAddress"
+                [class.is-invalid]="isControlInvalid('workAddress')"
+                [class.is-valid]="isControlValid('workAddress')"
+                formControlName="workAddress"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('workAddress')">
+                Please enter Work Address
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('workAddress')">
+                Work Address was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'workAddress')"
+              >
+                Work Address is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'workAddress')"
+              >
+                Work Address should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'workAddress')"
+              >
+                Work Address should have maximum 100 symbols
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>Work City</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder=""
+                name="workCity"
+                [class.is-invalid]="isControlInvalid('workCity')"
+                [class.is-valid]="isControlValid('workCity')"
+                formControlName="workCity"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('workCity')">
+                Please enter Work City
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('workCity')">
+                Work City was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'workCity')"
+              >
+                Work City is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'workCity')"
+              >
+               Work City should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'workCity')"
+              >
+                Work City should have maximum 100 symbols
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>Work State</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder=""
+                name="workState"
+                [class.is-invalid]="isControlInvalid('workState')"
+                [class.is-valid]="isControlValid('workState')"
+                formControlName="workState"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('workState')">
+                Please enter Work State
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('workState')">
+                Work State was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'workState')"
+              >
+                Work State is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'workState')"
+              >
+               Work State should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'workState')"
+              >
+                Work State should have maximum 100 symbols
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+
+            <div class="col-lg-4">
+              <label>Work Country</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder=""
+                name="workCountry"
+                [class.is-invalid]="isControlInvalid('workCountry')"
+                [class.is-valid]="isControlValid('workCountry')"
+                formControlName="workCountry"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('workCountry')">
+                Please enter Work Country
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('workCountry')">
+                Work Country was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'workCountry')"
+              >
+                Work Country is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'workCountry')"
+              >
+               Work Country should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'workCountry')"
+              >
+                Work Country should have maximum 100 symbols
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>Work Phone</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder=""
+                name="workPhone"
+                [class.is-invalid]="isControlInvalid('workPhone')"
+                [class.is-valid]="isControlValid('workPhone')"
+                formControlName="workPhone"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('workPhone')">
+                Please enter Work Phone
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('workPhone')">
+                Work Phone was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'workPhone')"
+              >
+                Work Phone is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'workPhone')"
+              >
+               Work Phone should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'workPhone')"
+              >
+                Work Phone should have maximum 100 symbols
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>Work Mobile</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder=""
+                name="workMobile"
+                [class.is-invalid]="isControlInvalid('workMobile')"
+                [class.is-valid]="isControlValid('workMobile')"
+                formControlName="workMobile"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('workMobile')">
+                Please enter Work Mobile
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('workMobile')">
+                Work Mobile was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'workMobile')"
+              >
+                Work Mobile is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'workMobile')"
+              >
+               Work Mobile should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'workMobile')"
+              >
+                Work Mobile should have maximum 100 symbols
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+
+            <div class="col-lg-4">
+              <label>Work Email ID</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder=""
+                name="workEmailID"
+                [class.is-invalid]="isControlInvalid('workEmailID')"
+                [class.is-valid]="isControlValid('workEmailID')"
+                formControlName="workEmailID"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('workEmailID')">
+                Please enter Work EmailID
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('workEmailID')">
+                Work EmailID was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'workEmailID')"
+              >
+                Work EmailID is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'workEmailID')"
+              >
+               Work EmailID should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'workEmailID')"
+              >
+                Work EmailID should have maximum 100 symbols
+              </div>
+            </div>
+
+
+          </div>
+        
+          
+          <div class="float-right">
+            <a
+              class="btn btn-default font-weight-bold mr-2"
+              routerLink="/ecommerce/employees"
+              >Cancel</a
+            >
+            <button
+              type="submit"
+              class="btn btn-primary font-weight-bold mr-2"
+              [disabled]="formGroup.invalid"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </ng-container>
+
+    <ng-container
+      *ngIf="activeTabId === tabs.HOME_DETAILS && employee && employee.id"
+    >
+      <div class="mt-5" *ngIf="employee">
+        <form
+          action="#"
+          class="form form-label-right"
+          [formGroup]="formGroup"
+          (ngSubmit)="save()"
+        >
+          <div class="form-group row">
+            <div class="col-lg-4">
+              <label>Home Address</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Home Address"
+                name="homeAddress"
+                [class.is-invalid]="isControlInvalid('homeAddress')"
+                [class.is-valid]="isControlValid('homeAddress')"
+                formControlName="homeAddress"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('homeAddress')">
+                Please enter Home Address
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('homeAddress')">
+                Home Address was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'homeAddress')"
+              >
+                Home Address is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'homeAddress')"
+              >
+                Home Address should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'homeAddress')"
+              >
+                Home Address should have maximum 100 symbols
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>Home City</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder=""
+                name="homeCity"
+                [class.is-invalid]="isControlInvalid('homeCity')"
+                [class.is-valid]="isControlValid('homeCity')"
+                formControlName="homeCity"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('homeCity')">
+                Please enter Home City
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('homeCity')">
+                Home City was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'homeCity')"
+              >
+                Home City is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'homeCity')"
+              >
+               Home City should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'homeCity')"
+              >
+                Home City should have maximum 100 symbols
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>Home State</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder=""
+                name="homeState"
+                [class.is-invalid]="isControlInvalid('homeState')"
+                [class.is-valid]="isControlValid('homeState')"
+                formControlName="homeState"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('homeState')">
+                Please enter Home State
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('homeState')">
+                Home State was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'homeState')"
+              >
+                Home State is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'homeState')"
+              >
+               Home State should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'homeState')"
+              >
+                Home State should have maximum 100 symbols
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+
+            <div class="col-lg-4">
+              <label>Home Country</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder=""
+                name="homeCountry"
+                [class.is-invalid]="isControlInvalid('homeCountry')"
+                [class.is-valid]="isControlValid('homeCountry')"
+                formControlName="homeCountry"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('homeCountry')">
+                Please enter Home Country
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('homeCountry')">
+                Home Country was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'homeCountry')"
+              >
+                Home Country is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'homeCountry')"
+              >
+               Home Country should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'homeCountry')"
+              >
+                Home Country should have maximum 100 symbols
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>Home Phone</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder=""
+                name="phone"
+                [class.is-invalid]="isControlInvalid('phone')"
+                [class.is-valid]="isControlValid('phone')"
+                formControlName="phone"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('phone')">
+                Please enter Home Phone
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('phone')">
+                Home Phone was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'phone')"
+              >
+                Home Phone is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'phone')"
+              >
+               Home Phone should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'phone')"
+              >
+                Home Phone should have maximum 100 symbols
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>Home Mobile</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder=""
+                name="homeMobile"
+                [class.is-invalid]="isControlInvalid('homeMobile')"
+                [class.is-valid]="isControlValid('homeMobile')"
+                formControlName="homeMobile"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('homeMobile')">
+                Please enter Home Mobile
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('homeMobile')">
+                Home Mobile was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'homeMobile')"
+              >
+                Home Mobile is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'homeMobile')"
+              >
+               Home Mobile should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'homeMobile')"
+              >
+                Home Mobile should have maximum 100 symbols
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+
+            <div class="col-lg-4">
+              <label>Home Email ID</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder=""
+                name="email"
+                [class.is-invalid]="isControlInvalid('email')"
+                [class.is-valid]="isControlValid('email')"
+                formControlName="email"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('email')">
+                Please enter Home EmailID
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('email')">
+                Home EmailID was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'email')"
+              >
+                Home EmailID is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'email')"
+              >
+               Home EmailID should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'email')"
+              >
+                Home EmailID should have maximum 100 symbols
+              </div>
+            </div>
+
+
+          </div>
+        
+          
+          <div class="float-right">
+            <a
+              class="btn btn-default font-weight-bold mr-2"
+              routerLink="/ecommerce/employees"
+              >Cancel</a
+            >
+            <button
+              type="submit"
+              class="btn btn-primary font-weight-bold mr-2"
+              [disabled]="formGroup.invalid"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+      
+    </ng-container>
+
+    <ng-container
+      *ngIf="activeTabId === tabs.IMEI_DETAILS && employee && employee.id"
+    >
+      <div class="mt-5" *ngIf="employee">
+        <form
+          action="#"
+          class="form form-label-right"
+          [formGroup]="formGroup"
+          (ngSubmit)="save()"
+        >
+          <div class="form-group row">
+            <div class="col-lg-4">
+              <label>Mobile IMEI Code 1</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Mobile IMEI Code 1"
+                name="IMEICode1"
+                [class.is-invalid]="isControlInvalid('IMEICode1')"
+                [class.is-valid]="isControlValid('IMEICode1')"
+                formControlName="IMEICode1"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('IMEICode1')">
+                Please enter Mobile IMEI Code 1
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('IMEICode1')">
+                Mobile IMEI Code 1 was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'IMEICode1')"
+              >
+                Mobile IMEI Code 1 is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'IMEICode1')"
+              >
+                Mobile IMEI Code 1 should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'IMEICode1')"
+              >
+                Mobile IMEI Code 1 should have maximum 100 symbols
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <label>Mobile IMEI Code 2</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                autocomplete="off"
+                placeholder="Second Gov ID Type"
+                name="IMEICode2"
+                [class.is-invalid]="isControlInvalid('IMEICode2')"
+                [class.is-valid]="isControlValid('IMEICode2')"
+                formControlName="IMEICode2"
+              />
+              <div class="feedback" *ngIf="!isControlTouched('IMEICode2')">
+                Please enter Mobile IMEI Code 2
+              </div>
+              <div class="valid-feedback" *ngIf="isControlValid('IMEICode2')">
+                Mobile IMEI Code 2 was entered correct
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('required', 'IMEICode2')"
+              >
+                Mobile IMEI Code 2 is required
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('minlength', 'IMEICode2')"
+              >
+               Mobile IMEI Code 2 should have at least 3 symbols
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="controlHasError('maxLength', 'IMEICode2')"
+              >
+                Mobile IMEI Code 2 should have maximum 100 symbols
+              </div>
+            </div>
+          </div>
+
+          
+          <div class="float-right">
+            <a
+              class="btn btn-default font-weight-bold mr-2"
+              routerLink="/ecommerce/employees"
+              >Cancel</a
+            >
+            <button
+              type="submit"
+              class="btn btn-primary font-weight-bold mr-2"
+              [disabled]="formGroup.invalid"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+      
+    </ng-container>
+
+
+    
+  </div>
+</div>

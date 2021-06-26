@@ -1,0 +1,100 @@
+<div class="card card-custom gutter-b">
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">Items list</h3>
+    </div>
+    <div class="card-toolbar">
+      <button type="button" class="btn btn-primary" (click)="create()">New Item</button>
+    </div>
+  </div>
+  <div class="card-body">
+    <!-- begin: Filtration form -->
+    <div class="form form-label-right">
+      <div class="form-group row">
+        <div class="col-lg-2" [formGroup]="filterGroup">
+          <select class="form-control" name="status" placeholder="Filter by Status" formControlName="status">
+            <option value="">All</option>
+            <option value="0">Active</option>
+            <option value="2">Inactive</option>
+          </select><small class="form-text text-muted"><b>Filter</b> by Status</small>
+        </div>
+        <div class="col-lg-2" [formGroup]="searchGroup">
+          <input type="text" class="form-control" name="searchText" placeholder="Search" value=""
+            formControlName="searchTerm" /><small class="form-text text-muted"><b>Search</b> in all fields</small>
+        </div>
+      </div>
+    </div>
+    <!-- end: Filtration form -->
+    <!-- begin:Table -->
+    <div class="table-responsive angular-bootstrap-table">
+      <table class="table table-head-custom table-vertical-center overflow-hidden">
+        <thead>
+          <th class="text-dark">
+            Item Code
+            <app-sort-icon column="itemCode" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+              (sort)="sort($event)"></app-sort-icon>
+          </th>
+          <th class="text-dark">
+            Item Name
+            <app-sort-icon column="itemName" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+              (sort)="sort($event)"></app-sort-icon>
+          </th>
+
+          <th class="text-dark">
+            Item Group
+            <app-sort-icon column="itemGroup" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+              (sort)="sort($event)"></app-sort-icon>
+          </th>
+
+          <th class="text-dark">
+            Manage Batch No.
+            <app-sort-icon column="manageBatchNo" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+              (sort)="sort($event)"></app-sort-icon>
+          </th>          
+
+          <th class="text-dark">
+            Sales Item
+            <app-sort-icon column="salesItem" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+              (sort)="sort($event)"></app-sort-icon>
+          </th>
+
+           <th class="text-dark">
+            In Stock
+            <app-sort-icon column="inStock" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+              (sort)="sort($event)"></app-sort-icon>
+          </th>
+          <th>ACTIONS</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of itemService.items$ | async">
+            <!-- <td>{{ item.id }}</td> -->
+            <td>{{ item.itemCode }}</td>
+            <td>{{ item.itemName }}</td>
+            <td>{{ item.itemGroup }}</td>
+             <td>{{ item.manageBatchNo }}</td>
+            <td>{{ item.salesItem }}</td>
+            <td>{{ item.inStock }}</td>           
+            <td>
+              <a title="View item" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+                (click)="view(item.id)">
+                <span [inlineSVG]="'./assets/media/svg/icons/General/Visible.svg'" cacheSVG="true"
+                  class="svg-icon svg-icon-md svg-icon-primary">
+                </span>
+              </a>
+
+              <!-- <a title="Delete item" class="btn btn-icon btn-light btn-hover-danger btn-sm"
+                (click)="delete(item.id)">
+                <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
+                  class="svg-icon svg-icon-md svg-icon-danger">
+                </span>
+              </a> -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- end: Table -->
+    <app-paginator class="d-flex justify-content-between align-items-center flex-wrap" [paginator]="paginator"
+      [isLoading]="isLoading" (paginate)="paginate($event)"></app-paginator>
+  </div>
+</div>

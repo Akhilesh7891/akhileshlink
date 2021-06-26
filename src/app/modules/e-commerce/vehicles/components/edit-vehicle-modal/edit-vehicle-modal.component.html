@@ -1,0 +1,448 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <ng-container *ngIf="vehicle">
+        <ng-container *ngIf="vehicle.id">Edit</ng-container>
+        <ng-container *ngIf="!vehicle.id">Create</ng-container>
+        Vehicle
+        <ng-container *ngIf="vehicle.id"
+          >'{{ vehicle.vehicleCode }}'</ng-container
+        >
+      </ng-container>
+    </div>
+  </div>
+  <div
+    class="overlay overlay-block cursor-default modal-body"
+    style="min-height: 404px"
+  >
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="overlay-layer bg-transparent">
+        <div class="spinner spinner-lg spinner-success"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="vehicle">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">        
+        
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label class="form-label">Vehicle Code</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="vehicleCode"
+              placeholder="Vehicle Code"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('vehicleCode')"
+              [class.is-valid]="isControlValid('vehicleCode')"
+              formControlName="vehicleCode"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('vehicleCode')">
+              Vehicle Code was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'vehicleCode')"
+            >
+              Vehicle Code is required
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <label class="form-label">Vehicle Type</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="vehicleType"
+              placeholder="Vehicle Type"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('vehicleType')"
+              [class.is-valid]="isControlValid('vehicleType')"
+              formControlName="vehicleType"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('vehicleType')">
+              Vehicle Type was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'vehicleType')"
+            >
+              Vehicle Type is required
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <label class="form-label">Vehicle Model</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="vehicleModel"
+              placeholder="Vehicle Model"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('vehicleModel')"
+              [class.is-valid]="isControlValid('vehicleModel')"
+              formControlName="vehicleModel"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('vehicleModel')">
+              Vehicle Model was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'vehicleModel')"
+            >
+              Vehicle Model is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+            <label class="form-label">Vehicle Number</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="vehicleNumber"
+              placeholder="Vehicle Number"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('vehicleNumber')"
+              [class.is-valid]="isControlValid('vehicleNumber')"
+              formControlName="vehicleNumber"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('vehicleNumber')">
+              Vehicle Number was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'vehicleNumber')"
+            >
+              Vehicle Number is required
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label">Registration Number</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="registrationNumber"
+              placeholder="Registration Number"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('registrationNumber')"
+              [class.is-valid]="isControlValid('registrationNumber')"
+              formControlName="registrationNumber"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('registrationNumber')">
+              Registration Number was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'registrationNumber')"
+            >
+              Registration Number is required
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <label class="form-label">Registration Up To date</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="registrationValidUpTo"
+              placeholder="Registration Up To date"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('registrationValidUpTo')"
+              [class.is-valid]="isControlValid('registrationValidUpTo')"
+              formControlName="registrationValidUpTo"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('registrationValidUpTo')">
+              Registration Up To date was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'registrationValidUpTo')"
+            >
+              Registration Up To date is required
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+            <label class="form-label">Owner Name</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="ownerName"
+              placeholder="Owner Name"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('ownerName')"
+              [class.is-valid]="isControlValid('ownerName')"
+              formControlName="ownerName"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('ownerName')">
+              Owner Name was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'ownerName')"
+            >
+              Owner Name is required
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <label class="form-label">Engine Number</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="engineNumber"
+              placeholder="Owner Name"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('engineNumber')"
+              [class.is-valid]="isControlValid('engineNumber')"
+              formControlName="engineNumber"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('engineNumber')">
+              Engine Number entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'engineNumber')"
+            >
+             Engine Number is required
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-label">Chassis Number</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="chassisNumber"
+              placeholder="Chassis Number"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('chassisNumber')"
+              [class.is-valid]="isControlValid('chassisNumber')"
+              formControlName="chassisNumber"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('chassisNumber')">
+              Chassis Number was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'chassisNumber')"
+            >
+              Chassis Number is required
+            </div>
+          </div>          
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+            <label class="form-label">Weight Capacity</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="weightCapacity"
+              placeholder="Weight Capacity"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('weightCapacity')"
+              [class.is-valid]="isControlValid('weightCapacity')"
+              formControlName="weightCapacity"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('weightCapacity')">
+              Weight Capacity was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'weightCapacity')"
+            >
+              Weight Capacity is required
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <label class="form-label">Volume Capacity</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="volumeCapacity"
+              placeholder="Volume Capacity"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('volumeCapacity')"
+              [class.is-valid]="isControlValid('volumeCapacity')"
+              formControlName="volumeCapacity"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('volumeCapacity')">
+              Weight Capacity was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'volumeCapacity')"
+            >
+              Weight Capacity is required
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <label class="form-label">Manufacturing Year</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="manufacturingYear"
+              placeholder="Volume Capacity"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('manufacturingYear')"
+              [class.is-valid]="isControlValid('manufacturingYear')"
+              formControlName="manufacturingYear"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('manufacturingYear')">
+              Manufacturing Year was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'manufacturingYear')"
+            >
+              Manufacturing Year is required
+            </div>
+          </div>
+          
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+            <label class="form-label">Fuel Capacity</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="fuelCapacity"
+              placeholder="Volume Capacity"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('fuelCapacity')"
+              [class.is-valid]="isControlValid('fuelCapacity')"
+              formControlName="fuelCapacity"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('fuelCapacity')">
+              Fuel Capacity was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'fuelCapacity')"
+            >
+              Fuel Capacity is required
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <label class="form-label">Insurance Valid Up To</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="insuranceValidUpTo"
+              placeholder="Volume Capacity"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('insuranceValidUpTo')"
+              [class.is-valid]="isControlValid('insuranceValidUpTo')"
+              formControlName="insuranceValidUpTo"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('insuranceValidUpTo')">
+              Insurance Valid Up To was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'insuranceValidUpTo')"
+            >
+              Insurance Valid Up To is required
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <label class="form-label">pollution Valid Up To</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="pollutionValidUpTo"
+              placeholder="Volume Capacity"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('pollutionValidUpTo')"
+              [class.is-valid]="isControlValid('pollutionValidUpTo')"
+              formControlName="pollutionValidUpTo"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('pollutionValidUpTo')">
+              pollution Valid Up To was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'pollutionValidUpTo')"
+            >
+              pollution Valid Up To is required
+            </div>
+          </div>
+          
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4">
+            <label class="form-label">Vehicle Documents</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="vehicleDocuments"
+              placeholder="Volume Capacity"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('vehicleDocuments')"
+              [class.is-valid]="isControlValid('vehicleDocuments')"
+              formControlName="vehicleDocuments"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('vehicleDocuments')">
+              Vehicle Documents was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'vehicleDocuments')"
+            >
+              Vehicle Documents is required
+            </div>
+          </div>
+        
+          <div class="col-lg-4">
+            <label>Status</label>
+            <select
+              class="form-control form-control-lg form-control-solid"
+              name="status"
+              [class.is-invalid]="isControlInvalid('status')"
+              formControlName="status"
+            >
+              <option value="0">Active</option>
+              <option value="1">Inactive</option>
+            </select>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'status')"
+            >
+              Status is required
+            </div>
+          </div> 
+        </div>
+      </form>
+    </ng-container>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light btn-elevate mr-2"
+      (click)="modal.dismiss()"
+    >
+      Cancel
+    </button>
+    <ng-container *ngIf="vehicle">
+      <button
+        type="submit"
+        class="btn btn-primary btn-elevate"
+        (click)="save()"
+        [disabled]="formGroup.invalid"
+      >
+        Save
+      </button>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,98 @@
+<div class="card card-custom gutter-b">
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">Bankings list</h3>
+    </div>
+    <div class="card-toolbar">
+      <button type="button" class="btn btn-primary" (click)="create()">New Banking</button>
+    </div>
+  </div>
+  <div class="card-body">
+    <!-- begin: Filtration form -->
+    <div class="form form-label-right">
+      <div class="form-group row">
+        <!-- <div class="col-lg-2" [formGroup]="filterGroup">
+          <select class="form-control" name="status" placeholder="Filter by Status" formControlName="status">
+            <option value="">All</option>
+            <option value="0">Active</option>
+            <option value="2">Inactive</option>
+          </select><small class="form-text text-muted"><b>Filter</b> by Status</small>
+        </div>
+        <div class="col-lg-2" [formGroup]="searchGroup">
+          <input type="text" class="form-control" name="searchText" placeholder="Search" value=""
+            formControlName="searchTerm" /><small class="form-text text-muted"><b>Search</b> in all fields</small>
+        </div> -->
+      </div>
+    </div>
+    <!-- end: Filtration form -->
+    <!-- begin:Table -->
+    <div class="table-responsive angular-bootstrap-table">
+      <table class="table table-head-custom table-vertical-center overflow-hidden">
+        <thead>
+          <th class="text-dark">
+            Employee Code
+            <app-sort-icon column="employeeCode" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+              (sort)="sort($event)"></app-sort-icon>
+          </th>          
+          <th>
+            Employee Name
+            <app-sort-icon column="employeeName" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+              (sort)="sort($event)"></app-sort-icon>
+          </th>
+          <th>
+            Doc No
+            <app-sort-icon column="docNo" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+              (sort)="sort($event)"></app-sort-icon>
+          </th>
+          <th>
+            Deposit Amount
+            <app-sort-icon column="amountDeposit" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+              (sort)="sort($event)"></app-sort-icon>
+          </th>
+          <th>
+            Deposit Date
+            <app-sort-icon column="depositDate" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+              (sort)="sort($event)"></app-sort-icon>
+          </th>
+
+          <th>
+            Bank Branch
+            <app-sort-icon column="bankBranch" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+              (sort)="sort($event)"></app-sort-icon>
+          </th>
+
+          <th>ACTIONS</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let banking of bankingService.items$ | async">
+            <td>{{ banking.employeeCode }}</td>
+            <td>{{ banking.employeeName }}</td>
+            <td>{{ banking.docNo }}</td>
+            <td>{{ banking.amountDeposit }}</td>
+            <td>{{ banking.depositDate }}</td>
+            <td>{{ banking.bankBranch }}</td>            
+            <td>
+
+              <a title="Edit banking" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+                (click)="edit(banking.id)">
+                <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
+                  class="svg-icon svg-icon-md svg-icon-primary">
+                </span>
+              </a>
+
+              <a title="Delete banking" class="btn btn-icon btn-light btn-hover-danger btn-sm"
+                (click)="delete(banking.id)">
+                <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
+                  class="svg-icon svg-icon-md svg-icon-danger">
+                </span>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- end: Table -->
+    <app-paginator class="d-flex justify-content-between align-items-center flex-wrap" [paginator]="paginator"
+      [isLoading]="isLoading" (paginate)="paginate($event)"></app-paginator>
+  </div>
+</div>

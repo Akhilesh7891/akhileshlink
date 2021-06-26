@@ -1,0 +1,51 @@
+<div class="table-responsive angular-bootstrap-table">
+    <table class="table table-head-custom table-vertical-center overflow-hidden">
+      <thead>
+        <th class="text-dark">
+          ACTIVITY CODE
+          <app-sort-icon column="ActivityCode" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+            (sort)="sort($event)"></app-sort-icon>
+        </th>
+        <th>
+          CUSTOMER CODE
+          <app-sort-icon column="CustomerCode" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+            (sort)="sort($event)"></app-sort-icon>
+        </th>
+        <th>
+          CUSTOMER NAME
+          <app-sort-icon column="CustomerName" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+            (sort)="sort($event)"></app-sort-icon>
+        </th>
+
+        <th>
+         ACTIVITY TYPE
+          <app-sort-icon column="ActivityType" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+            (sort)="sort($event)"></app-sort-icon>
+        </th>
+        <th>
+          ACTIVITY DATE
+          <app-sort-icon column="ActivityDate" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+            (sort)="sort($event)"></app-sort-icon>
+        </th>
+       
+      </thead>
+      <tbody>
+          <ng-container *ngFor="let item of activityService.items$ | async">
+            <tr *ngIf="item.id==id">
+                <td><a style="color: blue;cursor: pointer;"
+                  (click)="viewActivity(item.id)" >{{item.ActivityCode}}</a></td>
+                <td>{{item.CustomerCode}}</td>
+                <td>{{item.CustomerName}}</td>
+                <td>{{item.ActivityType}}</td>
+                <td>{{item.ActivityDate | date }}</td>
+            </tr>
+          </ng-container>
+         
+         
+       
+      </tbody>
+    </table>
+  </div>
+  <!-- end: Table -->
+  <!-- <app-paginator class="d-flex justify-content-between align-items-center flex-wrap" [paginator]="paginator"
+    [isLoading]="isLoading" (paginate)="paginate($event)"></app-paginator> -->

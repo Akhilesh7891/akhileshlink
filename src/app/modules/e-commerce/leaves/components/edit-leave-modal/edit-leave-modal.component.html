@@ -1,0 +1,138 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <ng-container *ngIf="leave">
+        <ng-container *ngIf="leave.id">Edit</ng-container>
+        <ng-container *ngIf="!leave.id">Create</ng-container>
+        Leave
+        <ng-container *ngIf="leave.id"
+          >'{{ leave.leaveCode }}'</ng-container
+        >
+      </ng-container>
+    </div>
+  </div>
+  <div
+    class="overlay overlay-block cursor-default modal-body"
+    style="min-height: 404px"
+  >
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="overlay-layer bg-transparent">
+        <div class="spinner spinner-lg spinner-success"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="leave">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label class="form-label">Leave Code</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="leaveCode"
+              placeholder="Leave code"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('leaveCode')"
+              [class.is-valid]="isControlValid('leaveCode')"
+              formControlName="leaveCode"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('leaveCode')">
+              Leave Code was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'leaveCode')"
+            >
+              Leave Code is required
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <label class="form-label">Leave Type</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="leaveType"
+              placeholder="Leave Type"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('leaveType')"
+              [class.is-valid]="isControlValid('leaveType')"
+              formControlName="leaveType"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('leaveType')">
+              Leave Type was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'leaveType')"
+            >
+              Leave Type is required
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <label class="form-label">Leave Balance</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="leaveBalance"
+              placeholder="Leave Balance"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('leaveBalance')"
+              [class.is-valid]="isControlValid('leaveBalance')"
+              formControlName="leaveBalance"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('leaveBalance')">
+              Leave Balance was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'leaveBalance')"
+            >
+              Leave Balance is required
+            </div>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-lg-4">
+            <label>Status</label>
+            <select
+              class="form-control form-control-lg form-control-solid"
+              name="status"
+              [class.is-invalid]="isControlInvalid('status')"
+              formControlName="status"
+            >
+              <option value="0">Active</option>
+              <option value="1">Inactive</option>
+            </select>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'status')"
+            >
+              Status is required
+            </div>
+          </div>
+        </div>
+      </form>
+    </ng-container>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light btn-elevate mr-2"
+      (click)="modal.dismiss()"
+    >
+      Cancel
+    </button>
+    <ng-container *ngIf="leave">
+      <button
+        type="submit"
+        class="btn btn-primary btn-elevate"
+        (click)="save()"
+        [disabled]="formGroup.invalid"
+      >
+        Save
+      </button>
+    </ng-container>
+  </div>
+</div>

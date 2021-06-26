@@ -1,0 +1,40 @@
+<div class="table-responsive angular-bootstrap-table">
+    <table class="table table-head-custom table-vertical-center overflow-hidden">
+      <thead>
+        <th class="text-dark">
+          INVOICE CODE
+         
+        </th>
+        <th>
+            INVOICE DATE
+         
+        </th>
+        <th>
+            STATUS
+         
+        </th>
+        <th>
+            CUSTOMER CODE
+           
+          </th>
+        <th>
+          CUSTOMER NAME
+         
+        </th>
+       
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let item of activityService.items$ | async">
+            <tr *ngIf="item.id==id">
+                <td> <a style="color: blue;cursor: pointer;"
+                    (click)="viewDetails(item.id)" >INV12312</a></td>
+                <td>20-May-2021</td>
+                <td>Active</td>
+                <td>{{item.CustomerCode}}</td>
+                <td>{{item.CustomerName}}</td>
+            </tr>
+          </ng-container>
+      </tbody>
+    </table>
+  </div>
+  

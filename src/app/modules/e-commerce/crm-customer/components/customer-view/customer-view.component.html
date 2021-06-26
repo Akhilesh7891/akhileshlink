@@ -1,0 +1,95 @@
+<div class="card card-custom gutter-b">
+  <ng-container *ngIf="isLoading$ | async">
+    <div class="progress progress-modal">
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar"
+        style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+  </ng-container>
+
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">
+        View
+        <!-- <ng-container *ngIf="companycustomer">
+          {{ id ? "Edit" : "New" }} Customer:
+          <span *ngIf="companycustomer && companycustomer.id">'{{ companycustomer.customerCode }} -
+            {{ companycustomer.customerName }}'</span>
+        </ng-container> -->
+      </h3>
+    </div>
+    <div class="card-toolbar">
+      <a type="button" class="btn btn-light" routerLink="/ecommerce/companycustomers">
+        <i class="fa fa-arrow-left"></i>Back
+      </a>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="form form-label-right">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-lg-3">
+            <label class="form-label">Customer Code</label>
+              <input type="text" class="form-control" value="{{companycustomer.customerCode}}" disabled name="searchText" placeholder="Customer Code" value="" />
+          </div>
+          <div class="col-lg-3">
+            <label class="form-label">Customer Name</label>
+              <input type="text" class="form-control" value="{{companycustomer.customerName}}"  disabled name="searchText" placeholder="Customer Name" value="" />
+          </div>
+          <div class="col-lg-3">
+            <label class="form-label">Contact Person</label>
+              <input type="text" class="form-control" value="{{companycustomer.firstName}}" disabled name="searchText" placeholder="Contact Person" value="" />
+          </div>
+          <div class="col-lg-3">
+            <label class="form-label">Mobile Number</label>
+              <input type="text" class="form-control" value="{{companycustomer.phone}}" disabled name="searchText" placeholder="Mobile Number" value="" />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ul class="nav nav-tabs nav-tabs-line" role="tablist">
+      <li class="nav-item cursor-pointer" (click)="changeTab(tabs.ACTIVITY_TAB)">
+        <a class="nav-link" data-toggle="tab" role="tab" [attr.aria-selected]="activeTabId === tabs.ACTIVITY_TAB"
+          [class.active]="activeTabId === tabs.ACTIVITY_TAB">
+          Activity
+        </a>
+      </li>
+      <li *ngIf="companycustomer && companycustomer.id" class="nav-item cursor-pointer"
+        (click)="changeTab(tabs.INVOICE_TAB)">
+        <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.INVOICE_TAB"
+          [class.active]="activeTabId === tabs.INVOICE_TAB">Invoice</a>
+      </li>
+
+      <li *ngIf="companycustomer && companycustomer.id" class="nav-item cursor-pointer"
+        (click)="changeTab(tabs.DELIVERY_TAB)">
+        <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.DELIVERY_TAB"
+          [class.active]="activeTabId === tabs.DELIVERY_TAB">Delivery</a>
+      </li>
+
+      <li *ngIf="companycustomer && companycustomer.id" class="nav-item cursor-pointer"
+        (click)="changeTab(tabs.ORDER_TAB)">
+        <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.ORDER_TAB"
+          [class.active]="activeTabId === tabs.ORDER_TAB">Order</a>
+      </li>
+
+    </ul>
+
+    <ng-container *ngIf="activeTabId === tabs.ACTIVITY_TAB">
+      <app-activity [customerId]="companycustomer.id"></app-activity>
+    </ng-container>
+
+    <ng-container *ngIf="activeTabId === tabs.INVOICE_TAB && companycustomer && companycustomer.id"      >
+        <app-invoice [customerId]="companycustomer.id"></app-invoice>
+      </ng-container>
+  
+      <ng-container *ngIf="activeTabId === tabs.DELIVERY_TAB && companycustomer && companycustomer.id"      >
+        <app-delivery [customerId]="companycustomer.id"></app-delivery>
+      </ng-container>
+  
+      <ng-container *ngIf="activeTabId === tabs.ORDER_TAB && companycustomer && companycustomer.id">
+        <app-order [customerId]="companycustomer.id"></app-order>
+      </ng-container>
+  </div>
+</div>

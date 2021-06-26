@@ -1,0 +1,165 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <ng-container *ngIf="currency">
+        <ng-container *ngIf="currency.id">Edit</ng-container>
+        <ng-container *ngIf="!currency.id">Create</ng-container>
+        Currency
+        <ng-container *ngIf="currency.id"
+          >'{{ currency.name }}'</ng-container
+        >
+      </ng-container>
+    </div>
+  </div>
+  <div
+    class="overlay overlay-block cursor-default modal-body"
+    style="min-height: 404px"
+  >
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="overlay-layer bg-transparent">
+        <div class="spinner spinner-lg spinner-success"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="currency">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">
+        
+        
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label class="form-label">Name</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="name"
+              placeholder="Currency name"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('name')"
+              [class.is-valid]="isControlValid('name')"
+              formControlName="name"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('name')">
+              Currency name was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'name')"
+            >
+              Currency name is required
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <label class="form-label">Currency Code</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="currencyCode"
+              placeholder="Currency code"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('currencyCode')"
+              [class.is-valid]="isControlValid('currencyCode')"
+              formControlName="currencyCode"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('currencyCode')">
+              Currency code was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'currencyCode')"
+            >
+              Currency code is required
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <label class="form-label">Currency Sign</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="currencySign"
+              placeholder="Currency code"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('currencySign')"
+              [class.is-valid]="isControlValid('currencySign')"
+              formControlName="currencySign"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('currencySign')">
+              Currency sign was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'currencySign')"
+            >
+              Currency sign is required
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+
+          <div class="col-lg-4">
+            <label class="form-label">Decimal Place</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="decimalPlace"
+              placeholder="Decimal Place"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('decimalPlace')"
+              [class.is-valid]="isControlValid('decimalPlace')"
+              formControlName="decimalPlace"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('decimalPlace')">
+              Decimal was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'decimalPlace')"
+            >
+              Decimal is required
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <label>Status</label>
+            <select
+              class="form-control form-control-lg form-control-solid"
+              name="status"
+              [class.is-invalid]="isControlInvalid('status')"
+              formControlName="status"
+            >
+              <option value="0">Active</option>
+              <option value="1">Inactive</option>
+            </select>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'status')"
+            >
+              Status is required
+            </div>
+          </div> 
+        </div>
+      </form>
+    </ng-container>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light btn-elevate mr-2"
+      (click)="modal.dismiss()"
+    >
+      Cancel
+    </button>
+    <ng-container *ngIf="currency">
+      <button
+        type="submit"
+        class="btn btn-primary btn-elevate"
+        (click)="save()"
+        [disabled]="formGroup.invalid"
+      >
+        Save
+      </button>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,93 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <ng-container *ngIf="role">
+        <ng-container *ngIf="role.id">Edit</ng-container>
+        <ng-container *ngIf="!role.id">Create</ng-container>
+        Role
+        <ng-container *ngIf="role.id"
+          >'{{ role.roleName }}'</ng-container
+        >
+      </ng-container>
+    </div>
+  </div>
+  <div
+    class="overlay overlay-block cursor-default modal-body"
+    style="min-height: 404px"
+  >
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="overlay-layer bg-transparent">
+        <div class="spinner spinner-lg spinner-success"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="role">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">
+        
+        
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label class="form-label">Role Name</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="roleName"
+              placeholder="Role name"
+              autocomplete="off"
+              [class.is-invalid]="isControlInvalid('roleName')"
+              [class.is-valid]="isControlValid('roleName')"
+              formControlName="roleName"
+            />
+            <div class="valid-feedback" *ngIf="isControlValid('roleName')">
+              Role was entered correct
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'roleName')"
+            >
+              Role is required
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <label>Status</label>
+            <select
+              class="form-control form-control-lg form-control-solid"
+              name="status"
+              [class.is-invalid]="isControlInvalid('status')"
+              formControlName="status"
+            >
+              <option value="0">Active</option>
+              <option value="1">Inactive</option>
+            </select>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'status')"
+            >
+              Status is required
+            </div>
+          </div> 
+        </div>
+      </form>
+    </ng-container>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light btn-elevate mr-2"
+      (click)="modal.dismiss()"
+    >
+      Cancel
+    </button>
+    <ng-container *ngIf="role">
+      <button
+        type="submit"
+        class="btn btn-primary btn-elevate"
+        (click)="save()"
+        [disabled]="formGroup.invalid"
+      >
+        Save
+      </button>
+    </ng-container>
+  </div>
+</div>
