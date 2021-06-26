@@ -4,7 +4,7 @@ export interface Banking extends BaseModel {
   id: number;
   employeeCode: string;
   employeeName: string;
-  docNo: number;
+  docNo: string;
   date: Date;
   location: string;
   amountDeposit: number;
